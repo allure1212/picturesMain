@@ -9,7 +9,7 @@
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
 	
-	<!-- 인덱스 수정연습 -->
+	<!-- 인덱스 수정연습  추가수정!!-->
 </body>
 </html>
 
