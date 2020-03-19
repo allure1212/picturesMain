@@ -1,0 +1,44 @@
+package com.kh.screen.model.service;
+
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.getConnection;
+
+import java.sql.Connection;
+import java.util.List;
+
+import com.kh.screen.model.dao.ScreenDao;
+import com.kh.screen.model.dao.ScreenFlatDto;
+import com.kh.screen.model.vo.Screen;
+
+public class ScreenService {
+
+	/** 1. 사용자가 제공한 정보를 통해 Screen 정보를 객체-->list에 담아옴
+	 * @param theaterNo		극장번호
+	 * @param movieNo		영화번호
+	 * @param screenDate	상영날짜/시간
+	 * @return				객체--> List에 담아서
+	 */
+	public List<Screen> selectScreen(String theaterNo, String movieNo, String screenDate) {
+		Connection conn = getConnection();
+		
+		List<Screen> list = new ScreenDao().selectScreen(conn, theaterNo, movieNo, screenDate);
+		
+		close(conn);
+		return list;
+	}
+
+	/** 2. 사용자가 제공한 정보를 통해 Screen 정보를 객체-->List에 담아옴
+	 * @param theaterNo		극장번호
+	 * @param screenDate	상영날짜/시간
+	 * @return				스크린 객체-->List에 담아서
+	 */
+	public List<ScreenFlatDto> selectScreen(String theaterNo, String screenDate) {
+		Connection conn = getConnection();
+		
+		List<ScreenFlatDto> list = new ScreenDao().selectScreen(conn, theaterNo, screenDate);
+		
+		close(conn);
+		return list;
+	}
+
+}
