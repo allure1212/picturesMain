@@ -8,6 +8,8 @@
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
+	
+	<!-- 인덱스 수정연습 -->
 </body>
 </html>
 
