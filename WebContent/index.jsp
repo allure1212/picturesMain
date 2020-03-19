@@ -8,8 +8,7 @@
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
-	
-	<!-- 커밋 수정 연습-->
+
 </body>
 </html>
 
