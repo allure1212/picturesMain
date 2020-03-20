@@ -3,11 +3,16 @@ package com.kh.movie.model.vo;
 import java.util.HashSet;
 import java.util.List;
 
-import lombok.Getter;
-
-@Getter
 public class Movies {
 	private List<Movie> movies;
+
+	public List<Movie> getMovies() {
+		return movies;
+	}
+
+	public void setMovies(List<Movie> movies) {
+		this.movies = movies;
+	}
 
 	public Movies(List<Movie> movies) {
 		this.movies = movies;
@@ -24,23 +29,3 @@ public class Movies {
 	}
 }
 
-// 내부에 필드는 무조건 1개
-// 로또
-// 중복되지 않는 숫자 6개
-// 로직 한곳에 응집
-
-class Lotto {
-	private List<Integer> numbers;
-	
-	public Lotto(List<Integer> numbers) {
-		this.numbers = numbers;
-		validateNumbers(numbers);
-	}
-	
-	private void validateNumbers(List<Integer> numbers) {
-		if(new HashSet(numbers).size() != 6) {
-			throw new RuntimeException();
-		}
-	}
-	
-}
