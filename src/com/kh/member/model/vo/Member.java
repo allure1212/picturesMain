@@ -26,7 +26,7 @@ public class Member {
 	/* TICKET_COUNT */
 	private int ticketCount;
 	/* SIGNUP_DATE */
-	private Object signupDate;
+	private Date signupDate;
 	/* STATUS */
 	private String status;
 	/* BLACK_STATUS */
@@ -39,7 +39,7 @@ public class Member {
 	public Member() {}
 	
 	public Member(int memberNo, String grade, String id, String pwd, String name, Object birth, String email,
-			String phone, String tel, String gender, int ticketCount, Object signupDate, String status,
+			String phone, String tel, String gender, int ticketCount, Date signupDate, String status,
 			String blackStatus, String blackCause, int blackCount) {
 		super();
 		this.memberNo = memberNo;
@@ -152,7 +152,7 @@ public class Member {
 		return signupDate;
 	}
 
-	public void setSignupDate(Object signupDate) {
+	public void setSignupDate(Date signupDate) {
 		this.signupDate = signupDate;
 	}
 

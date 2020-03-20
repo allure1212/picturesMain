@@ -7,7 +7,7 @@
 <title>index.jsp</title>
 </head>
 <body>
-	<%@ include file="/views/common/menubar.jsp" %>
+	<%@ include file="/views/common/admin.jsp" %>
 	
 	<!-- 커밋 연습 -->
 </body>
