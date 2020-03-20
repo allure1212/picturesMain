@@ -2,9 +2,6 @@ package com.kh.theater.model.dao;
 
 import java.util.Date;
 
-import lombok.Getter;
-
-@Getter
 public class RoomDto {
 
 	private Integer roomNo;
@@ -15,6 +12,30 @@ public class RoomDto {
 		super();
 		this.roomNo = roomNo;
 		this.roomName = roomName;
+		this.screenDate = screenDate;
+	}
+
+	public Integer getRoomNo() {
+		return roomNo;
+	}
+
+	public void setRoomNo(Integer roomNo) {
+		this.roomNo = roomNo;
+	}
+
+	public String getRoomName() {
+		return roomName;
+	}
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+
+	public Date getScreenDate() {
+		return screenDate;
+	}
+
+	public void setScreenDate(Date screenDate) {
 		this.screenDate = screenDate;
 	}
 	

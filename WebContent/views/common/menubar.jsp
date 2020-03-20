@@ -120,7 +120,7 @@
 									<ul>
 										<% for(TheaterDto theater : section.getTheaters()){%>
 										<li>
-											<a onclick="theaterDetail('<%= theater.getTheaterNo()%>');"><%= theater.getTheaterName() %></a>
+											<a onclick="theaterDetail('<%= theater.getTheaterNo() %>');"><%= theater.getTheaterName() %></a>
 										</li>
 										<% } %>
 									</ul>
