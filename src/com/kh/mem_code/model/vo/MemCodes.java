@@ -2,13 +2,20 @@ package com.kh.mem_code.model.vo;
 
 import java.util.List;
 
-import lombok.Getter;
 
-@Getter
+
 public class MemCodes {
 
 	private List<MemCode> memCodes;
 	
+	public List<MemCode> getMemCodes() {
+		return memCodes;
+	}
+
+	public void setMemCodes(List<MemCode> memCodes) {
+		this.memCodes = memCodes;
+	}
+
 	public MemCodes(List<MemCode> memCodes) {
 		this.memCodes = memCodes;
 	}
@@ -21,4 +28,6 @@ public class MemCodes {
 		}
 		return null;
 	}
+	
+	
 }

@@ -1,10 +1,6 @@
 package com.kh.movie.model.vo;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 public class Movie {
 	/* MOVIE_NO */
 	private int movieNo;
@@ -129,4 +125,79 @@ public class Movie {
 		}
 		return this.movieNo == movieNo.intValue();
 	}
+
+	public int getMovieNo() {
+		return movieNo;
+	}
+
+	public void setMovieNo(int movieNo) {
+		this.movieNo = movieNo;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public int getRuntime() {
+		return runtime;
+	}
+
+	public void setRuntime(int runtime) {
+		this.runtime = runtime;
+	}
+
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
+
+	public String getActor() {
+		return actor;
+	}
+
+	public void setActor(String actor) {
+		this.actor = actor;
+	}
+
+	public int getAgeLimit() {
+		return ageLimit;
+	}
+
+	public void setAgeLimit(int ageLimit) {
+		this.ageLimit = ageLimit;
+	}
+
+	public String getSynopsis() {
+		return synopsis;
+	}
+
+	public void setSynopsis(String synopsis) {
+		this.synopsis = synopsis;
+	}
+
+	public Object getOnDate() {
+		return onDate;
+	}
+
+	public void setOnDate(Object onDate) {
+		this.onDate = onDate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	
 }
+

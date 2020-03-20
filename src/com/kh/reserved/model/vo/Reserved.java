@@ -1,9 +1,5 @@
 package com.kh.reserved.model.vo;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter @Setter
 public class Reserved {
    /* RESERVED_NO */
    private int reservedNo;
@@ -21,6 +17,7 @@ public class Reserved {
 	   
    }
 
+<<<<<<< HEAD
 public Reserved(int reservedNo, int paymentNo, int memberNo, int screenNo) {
 	super();
 	this.reservedNo = reservedNo;
@@ -29,6 +26,8 @@ public Reserved(int reservedNo, int paymentNo, int memberNo, int screenNo) {
 	this.screenNo = screenNo;
 }
 
+=======
+>>>>>>> 2bad16c725c500255ae3cf11858b4002c23bca23
 public int getReservedNo() {
 	return reservedNo;
 }
@@ -61,9 +60,12 @@ public void setScreenNo(int screenNo) {
 	this.screenNo = screenNo;
 }
 
+<<<<<<< HEAD
 @Override
 public String toString() {
 	return "Reserved [reservedNo=" + reservedNo + ", paymentNo=" + paymentNo + ", memberNo=" + memberNo + ", screenNo="
 			+ screenNo + "]";
 }
+=======
+>>>>>>> 2bad16c725c500255ae3cf11858b4002c23bca23
 }
