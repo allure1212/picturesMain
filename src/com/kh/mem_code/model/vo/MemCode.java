@@ -2,12 +2,7 @@ package com.kh.mem_code.model.vo;
 
 import com.kh.common.StringUtils;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
-@AllArgsConstructor
 public class MemCode {
    /* MEM_CODE */
    private int memCode;
@@ -17,8 +12,55 @@ public class MemCode {
 
    /* MEM_PRICE */
    private int memPrice;
+   
+   
 
-   public boolean isEqualsMemType(String memType) {
+   public MemCode(int memCode, String memType, int memPrice) {
+	super();
+	this.memCode = memCode;
+	this.memType = memType;
+	this.memPrice = memPrice;
+}
+
+
+
+public int getMemCode() {
+	return memCode;
+}
+
+
+
+public void setMemCode(int memCode) {
+	this.memCode = memCode;
+}
+
+
+
+public String getMemType() {
+	return memType;
+}
+
+
+
+public void setMemType(String memType) {
+	this.memType = memType;
+}
+
+
+
+public int getMemPrice() {
+	return memPrice;
+}
+
+
+
+public void setMemPrice(int memPrice) {
+	this.memPrice = memPrice;
+}
+
+
+
+public boolean isEqualsMemType(String memType) {
 	   if(StringUtils.isEmpty(memType)) {
 		   return false;
 	   }
