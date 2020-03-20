@@ -9,6 +9,8 @@
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
 
+
+<!--  연습하기 -->
 </body>
 </html>
 
