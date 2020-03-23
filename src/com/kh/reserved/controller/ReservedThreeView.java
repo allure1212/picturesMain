@@ -61,7 +61,7 @@ public class ReservedThreeView extends HttpServlet {
 		
 		// 1급 컬렉션
 		// 이름있는 컬렉션
-		Movies movies = new Movies(new MovieService().selectScreen(theaterNo));
+		Movies movies = new Movies(new MovieService().selectScreen(theaterNo, screenDate));
 		List<Screen> scList = new ScreenService().selectScreen(theaterNo, movieNo, screenDate);
 		
 		request.setAttribute("screenDate", screenDate);

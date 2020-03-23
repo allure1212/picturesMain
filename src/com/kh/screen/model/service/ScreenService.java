@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.kh.screen.model.dao.ScreenDao;
 import com.kh.screen.model.dao.ScreenFlatDto;
+import com.kh.screen.model.dao.ScreenSelectDto;
 import com.kh.screen.model.vo.Screen;
 
 public class ScreenService {
@@ -40,5 +41,19 @@ public class ScreenService {
 		close(conn);
 		return list;
 	}
+
+	/** 3. ScreenNo를 통해 사용자에게 제공할 Screen 1개의 정보를 가져옴
+	 * @param screenNo
+	 * @return
+	 */
+	public ScreenSelectDto reservedScreen(String screenNo) {
+		Connection conn = getConnection();
+		ScreenSelectDto s = new ScreenDao().reservedScreen(conn, screenNo);
+		
+		close(conn);
+		return s;
+	}
+	
+	
 
 }

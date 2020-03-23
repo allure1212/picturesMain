@@ -15,10 +15,10 @@ public class MovieService {
 	 * @param theaterNo 사용자가 선택한 영화관
 	 * @return	위 선택된 지역/영화관에서 상영중인 영화 리스트
 	 */
-	public List<Movie> selectScreen(String theaterNo) {
+	public List<Movie> selectScreen(String theaterNo, String screenDate) {
 		Connection conn = getConnection();
 		
-		List<Movie> list = new MovieDao().selectScreen(conn, theaterNo);
+		List<Movie> list = new MovieDao().selectScreen(conn, theaterNo, screenDate);
 	
 		close(conn);
 		return list;

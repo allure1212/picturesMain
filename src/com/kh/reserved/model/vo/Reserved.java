@@ -45,4 +45,12 @@ public void setScreenNo(int screenNo) {
 	this.screenNo = screenNo;
 }
 
+public Reserved(int reservedNo, int paymentNo, int memberNo, int screenNo) {
+	super();
+	this.reservedNo = reservedNo;
+	this.paymentNo = paymentNo;
+	this.memberNo = memberNo;
+	this.screenNo = screenNo;
+}
+
 }
