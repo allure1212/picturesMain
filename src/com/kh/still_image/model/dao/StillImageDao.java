@@ -1,4 +1,4 @@
-package com.kh.movie.model.dao;
+package com.kh.still_image.model.dao;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -6,39 +6,35 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import static com.kh.common.JDBCTemplate.*;
 
-import com.kh.movie.model.vo.Movie;
+public class StillImageDao {
 
-public class MovieDao {
 	Properties prop = new Properties();
-	public MovieDao(){ //기본생성자
-		String fileName = MovieDao.class.getResource("/sql/movie/movie-query.properties").getPath();
+	public StillImageDao(){ //기본생성자
+		String fileName = StillImageDao.class.getResource("/sql/still_image/still_image-query.properties").getPath();
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	
 	}
-	public List<Movie> selectScreen(Connection conn, String theaterNo, String screenDate) {
-		List<Movie> list = new ArrayList<>();
+	
+	public String selectMain(Connection conn, String movieNo) {
+		String mainPoster = "";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectScreen");
+		String sql = prop.getProperty("selectMain");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, theaterNo);
-			pstmt.setString(2, screenDate);
-			
+			pstmt.setString(1, movieNo);
 			rset = pstmt.executeQuery();
+			
 			while(rset.next()) {
-				list.add(new Movie(rset.getInt("MOVIE_NO"), rset.getString("TITLE"), rset.getInt("AGE_LIMIT")));
+				mainPoster = rset.getString("MODIFY_NAME");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -47,7 +43,10 @@ public class MovieDao {
 			close(pstmt);
 		}
 		
-		return list;
+		return mainPoster;
 	}
+	
+	
+	
 	
 }
