@@ -2,49 +2,45 @@ package com.kh.movie.model.vo;
 
 import java.sql.Date;
 
-public class Movie {
-	/* MOVIE_NO */
-	private int movieNo;
-
-	/* TITLE */
-	private String title;
-
-	/* RUNTIME */
-	private int runtime;
-
-	/* DIRECTOR */
-	private String director;
-
-	/* ACTOR */
-	private String actor;
-
-	/* AGE_LIMIT */
-	private int ageLimit;
-
-	/* SYNOPSIS */
-	private String synopsis;
-
-	/* ON_DATE */
-	private Date onDate;
-
-	/* STATUS */
-	private String status;
+	public class MovieCBS {
 	
-	
+	  private int movieNo;
 
-	public Movie() {
+	   /* TITLE */
+	   private String title;
+
+	   /* RUNTIME */
+	   private int runtime;
+
+	   /* DIRECTOR */
+	   private String director;
+
+	   /* ACTOR */
+	   private String actor;
+
+	   /* AGE_LIMIT */
+	   private int ageLimit;
+
+	   /* SYNOPSIS */
+	   private String synopsis;
+
+	   /* ON_DATE */
+	   private Date onDate;
+	   
+	   private String modifyName;
+
+	   /* STATUS */
+	   private String status;
+
+	 public MovieCBS() {
 		super();
-
+		
 	}
+	 
+	 
 
-	public Movie(int movieNo, String title, int ageLimit) {
-		super();
-		this.movieNo = movieNo;
-		this.title = title;
-		this.ageLimit = ageLimit;
-	}
-	
-	public Movie(String title, String director, String actor, Date onDate, int runtime, int ageLimit, String synopsis) {
+	public MovieCBS(String title, String director, String actor, Date onDate, int runtime,   int ageLimit, String synopsis
+			) {
 		super();
 		this.title = title;
 		this.runtime = runtime;
@@ -54,21 +50,21 @@ public class Movie {
 		this.synopsis = synopsis;
 		this.onDate = onDate;
 	}
-	
-	public Movie(int movieNo, String title, int runtime, int ageLimit, Date onDate) {
+
+
+
+	public MovieCBS(int movieNo, String title, int runtime, String director, String actor, int ageLimit,
+			String synopsis, Date onDate, String modifyName) {
 		super();
 		this.movieNo = movieNo;
 		this.title = title;
 		this.runtime = runtime;
+		this.director = director;
+		this.actor = actor;
 		this.ageLimit = ageLimit;
+		this.synopsis = synopsis;
 		this.onDate = onDate;
-	}
-	
-	public boolean isEquals(Integer movieNo) {
-		if (movieNo == null) {
-			return false;
-		}
-		return this.movieNo == movieNo.intValue();
+		this.modifyName = modifyName;
 	}
 
 	public int getMovieNo() {
@@ -135,6 +131,14 @@ public class Movie {
 		this.onDate = onDate;
 	}
 
+	public String getModifyName() {
+		return modifyName;
+	}
+
+	public void setModifyName(String modifyName) {
+		this.modifyName = modifyName;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -143,6 +147,14 @@ public class Movie {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "MovieCBS [movieNo=" + movieNo + ", title=" + title + ", runtime=" + runtime + ", director=" + director
+				+ ", actor=" + actor + ", ageLimit=" + ageLimit + ", synopsis=" + synopsis + ", onDate=" + onDate
+				+ ", modifyName=" + modifyName + ", status=" + status + "]";
+	}
+	 
 	
+	   
+	   
 }
-
