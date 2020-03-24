@@ -121,8 +121,7 @@
                             	<fmt:formatNumber value="${adultCount + youthCount + seniorCount + disabledCount}"/>명
                            	</li>
                         </ul>
-                        <div class="seat_info"> 좌석: 
-                        	<c:forEach items="${seatNo}" var="s">${s}번 </c:forEach>
+                        <div class="seat_info"> 좌석: <jsp:include page="seatName.jsp"/>
                         </div>
                     </div>
                 </div>
@@ -170,7 +169,8 @@
         </div>
     </div>
 
-<form id="form" action="${contextPath}/reservedOne.do" role="form" method="post">	<input type="hidden" name="adultCount" value="${adultCount}"/>
+<form id="form" action="${contextPath}/reservedOne.do" role="form" method="post">
+	<input type="hidden" name="adultCount" value="${adultCount}"/>
 	<input type="hidden" name="youthCount" value="${youthCount}"/>
 	<input type="hidden" name="seniorCount" value="${seniorCount}"/>
 	<input type="hidden" name="disabledCount" value="${disabledCount}"/>"/>

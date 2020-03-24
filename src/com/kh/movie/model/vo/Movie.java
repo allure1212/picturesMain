@@ -1,5 +1,6 @@
 package com.kh.movie.model.vo;
 
+import java.util.Date;
 
 public class Movie {
 	/* MOVIE_NO */
@@ -24,10 +25,13 @@ public class Movie {
 	private String synopsis;
 
 	/* ON_DATE */
-	private Object onDate;
+	private Date onDate;
 
 	/* STATUS */
 	private String status;
+	
+	/* OFF_DATE */
+	private Date offDate;
 
 	public Movie(int movieNo, String title, int ageLimit) {
 		super();
@@ -103,7 +107,7 @@ public class Movie {
 		return onDate;
 	}
 
-	public void setOnDate(Object onDate) {
+	public void setOnDate(Date onDate) {
 		this.onDate = onDate;
 	}
 
@@ -113,6 +117,14 @@ public class Movie {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Date getOffDate() {
+		return offDate;
+	}
+
+	public void setOffDate(Date offDate) {
+		this.offDate = offDate;
 	}
 
 	

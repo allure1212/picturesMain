@@ -6,6 +6,8 @@ import static com.kh.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
+import com.kh.menubar.controller.NewMoviesDto;
+import com.kh.menubar.controller.TopMovieDto;
 import com.kh.movie.model.dao.MovieDao;
 import com.kh.movie.model.vo.Movie;
 
@@ -24,8 +26,31 @@ public class MovieService {
 		return list;
 	}
 
-	public List<Movie> selectAllByTheater(String theaterNo) {
-		return null;
-	}
 
+	/** 2. 메인화면에서 보여줄 예매율 상위5위
+	 * @param num 포스터 Level
+	 * @return
+	 */
+	public List<TopMovieDto> topFiveMovies(int num){
+		Connection conn = getConnection();
+		
+		List<TopMovieDto> tmd = new MovieDao().topFiveMovies(conn, num);
+		
+		close(conn);
+		return tmd;
+	}
+	
+	/** 3. 메인화면에서 보여줄 상영예정작
+	 * @return
+	 */
+	public List<NewMoviesDto> newMovies(){
+		Connection conn = getConnection();
+		
+		List<NewMoviesDto> nm = new MovieDao().newMovies(conn);
+		
+		close(conn);
+		
+		return nm;
+	}
+	
 }

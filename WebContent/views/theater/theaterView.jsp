@@ -4,15 +4,14 @@
 <%@ page import="java.util.List,
 				com.kh.theater.model.vo.Theater,
 				com.kh.theater.model.dao.MovieDto,
-				com.kh.theater.model.dao.RoomDto" %>
+				com.kh.theater.model.dao.RoomDto,
+				com.kh.common.DateUtils" %>
 <%@ page import="java.util.Date, java.text.SimpleDateFormat" %>
 <%
 	String screenDate = (String)request.getAttribute("screenDate");
 	Theater t = (Theater)request.getAttribute("selectTheater");
 	List<MovieDto> movies = (List)request.getAttribute("movies");
-%>
-<%	
-	SimpleDateFormat sf = new SimpleDateFormat("hh:mm");
+	String theaterNo = (String)request.getAttribute("theaterNo");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,6 +19,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
     * {margin:0; padding:0}
     .layout{ width: 1000px; margin: 0 auto; padding:50px;}
     .title {
@@ -54,8 +54,12 @@
         width: 250px;
         background-color: plum;
     }
-    .timeTable { padding: 30px;}
-    .timeTable ul li { list-style: none;}
+    #form { margin-top: 400px; border: 1px solid black;}
+    .timeTable { padding: 20px; font-size: 18px; font-weight: 800;}
+    #datePicker { padding: 20px; font-size: 18px;}
+    .timeTable p { margin-bottom: 20px;}
+    .timeTable ul li { list-style: none; display:inline-block; margin-bottom: 10px;}
+    .timeTable ul li:nth-child(1) {display:block; padding-left: 25px;}
 
     .timeTable ul li span{width:26px; height:26px; line-height:26px; margin-right:5px; border-radius:50%; font-weight: 700; display:inline-block; font-size:11px; color:#fff; text-align:center; margin: 20px;}
     .timeTable ul li span.grade_0{background:#5BC77E;}
@@ -88,35 +92,62 @@
         </div>
     </div>
 
-    <form>
+    <form id="form" action="<%=contextPath%>/detailView.th" method="post">
         <div>
-            
+            <input type="hidden" name="sectionNo" value="<%= t.getSectionNo() %>"/>
+            <input type="hidden" name="theaterNo" value="<%= theaterNo %>"/>
         </div>
         <div class="timeTable">
-            <input type="date" value="<%= screenDate %>"/>
+            <p>Date: <input type="text" id="datePicker" name="screenDate" size="20" value="<%= screenDate %>" style="font-weight: 800;"/></p>
             <!-- 영화별 영화시간 나열 -->
             <% for(MovieDto md : movies) { %>
             <ul>
             	<li><span class="grade_<%= md.getAgeLimit() %>"><%= md.getAgeLimit() %></span>
             		<strong><%= md.getTitle() %></strong>
+            		<input type="hidden" name="movieNo" value="<%= md.getMovieNo() %>"/>
             	</li>
             
 				<% for(RoomDto rd : md.getRooms()){ %>
 	            <li><ul>
-	            	<% String screenTime = sf.format(rd.getScreenDate()); %>
-	                <li><a href="#"><%= rd.getRoomName() %>관 <%= screenTime %></a></li>
+	                <li><a href="#" onclick="selectMovie(this);">[<%= rd.getRoomName() %>관] <%= DateUtils.formatDate(rd.getScreenDate(),"hh:mm") %></a>
+	                	<input type="hidden" name="roomNo" value="<%= rd.getRoomNo() %>"/>
+	                	<input type="hidden" name="screenTime" value="<%= DateUtils.formatDate(rd.getScreenDate(),"yyyy-MM-dd HH:mm") %>"/>
+	                </li>
 	            </ul></li>
 	            <% } %>
 	         </ul>
             <% } %>
         </div>
 
-
-
     </form>
 </div>  
 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+<script>
+$(function(){
+	$("#datePicker").datepicker({
+		  dateFormat: "yy-mm-dd"
+	});
+});
+
+$('#datePicker').change(function(){
+	var form = document.getElementById('form');
+	form.action = '${contextPath}/detailView.th';
+	form.method = 'post';
+	form.submit(); //theaterNo, screenDate,
+});
+
+function selectMovie(movie){
+	var form = document.getElementById('form');
+	form.action = '${contextPath}/reservedFour.do';
+	form.method = 'post';
+	form.submit(); //roonNo, screenDate, screenTime
+}
+
+</script>
 
 </body>
 </html>

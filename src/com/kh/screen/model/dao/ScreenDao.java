@@ -107,4 +107,29 @@ public class ScreenDao {
 		}
 		return s;
 	}
+
+	public String screenTheater(Connection conn, String movieNo, String roomNo, String screenTime) {
+		String screenNo = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("screenTh");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, movieNo);
+			pstmt.setString(2, roomNo);
+			pstmt.setString(3, screenTime);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				screenNo = rset.getString("SCREEN_NO");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return screenNo;
+	}
 }

@@ -53,6 +53,20 @@ public class ScreenService {
 		close(conn);
 		return s;
 	}
+
+	/** 4. 영화, 상영관, 상영시간을 통해 예약을 위한 Screen_no를 넘김
+	 * @param movieNo
+	 * @param roomNo
+	 * @param screenTime
+	 * @return
+	 */
+	public String screenTheater(String movieNo, String roomNo, String screenTime) {
+		Connection conn = getConnection();
+		
+		String screenNo = new ScreenDao().screenTheater(conn, movieNo, roomNo, screenTime);	
+		
+		return screenNo;
+	}
 	
 	
 

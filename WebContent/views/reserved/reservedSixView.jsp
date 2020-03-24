@@ -107,7 +107,7 @@
                         <li>인원: 
                         		<fmt:formatNumber value="${param.adultCount + param.youthCount + param.seniorCount + param.disabledCount}"/>명 </li>
                         <li>좌석:
-                        	<c:forEach items="${param.seatNo}" var="s">${s}번 </c:forEach>
+                        	<jsp:include page="seatName.jsp"/>
                         </li>
                         
                     </ul>
@@ -136,14 +136,11 @@
                 </div>
                 <div class="btns">
                     <div class="move_step">
-                        <button>&lt; prev</button>
-                        <button>결제확인</button>
+                        <button type="button" onclick="location.href='${contextPath}'">결제확인</button>
                     </div> 
                 </div>
             </div>
-            
         </div>
-
     </div>
 </div>
 

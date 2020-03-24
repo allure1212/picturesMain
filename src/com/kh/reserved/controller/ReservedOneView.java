@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.kh.member.model.vo.Member;
 import com.kh.section.model.service.SectionService;
 import com.kh.section.model.vo.Section;
 import com.kh.theater.model.service.TheaterService;
@@ -18,9 +20,18 @@ import static com.kh.common.isInteger.*;
 @WebServlet("/reservedOne.do")
 public class ReservedOneView extends HttpServlet {
 
- 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		Integer userNo = null;
+		if((Member)session.getAttribute("loginUser")==null) {
+			userNo = 1;
+		}else {
+			userNo = ((Member)session.getAttribute("loginUser")).getMemberNo();
+		}
+		
 		List<Section> sList = new SectionService().selectAll();
 		
 		String sectionNo = "1";
