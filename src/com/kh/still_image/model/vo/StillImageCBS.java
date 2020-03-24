@@ -1,6 +1,6 @@
 package com.kh.still_image.model.vo;
 
-public class StillImage {
+public class StillImageCBS {
    /* ADDFILE_NO */
    private int addfileNo;
 
@@ -18,12 +18,12 @@ public class StillImage {
    /* MOVIE_NO */
    private int movieNo;
 
-public StillImage() {
+public StillImageCBS() {
 	super();
-	// TODO Auto-generated constructor stub
+	
 }
 
-public StillImage(int addfileNo, String originName, String modifyName, String savePath, int level, int movieNo) {
+public StillImageCBS(int addfileNo, String originName, String modifyName, String savePath, int level, int movieNo) {
 	super();
 	this.addfileNo = addfileNo;
 	this.originName = originName;
@@ -31,6 +31,7 @@ public StillImage(int addfileNo, String originName, String modifyName, String sa
 	this.savePath = savePath;
 	this.level = level;
 	this.movieNo = movieNo;
+	
 }
 
 public int getAddfileNo() {
@@ -57,14 +58,6 @@ public void setModifyName(String modifyName) {
 	this.modifyName = modifyName;
 }
 
-public String getSavePath() {
-	return savePath;
-}
-
-public void setSavePath(String savePath) {
-	this.savePath = savePath;
-}
-
 public int getLevel() {
 	return level;
 }
@@ -81,6 +74,14 @@ public void setMovieNo(int movieNo) {
 	this.movieNo = movieNo;
 }
 
+public String getSavePath() {
+	return savePath;
+}
+
+public void setSavePath(String savePath) {
+	this.savePath = savePath;
+}
+
 @Override
 public String toString() {
 	return "StillImage [addfileNo=" + addfileNo + ", originName=" + originName + ", modifyName=" + modifyName
@@ -88,7 +89,6 @@ public String toString() {
 }
 
 
-   
-   
+
 
 }
