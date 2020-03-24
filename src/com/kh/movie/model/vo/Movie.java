@@ -30,11 +30,9 @@ public class Movie {
 	/* STATUS */
 	private String status;
 	
-	
 
 	public Movie() {
-		super();
-
+		
 	}
 
 	public Movie(int movieNo, String title, int ageLimit) {
@@ -43,6 +41,7 @@ public class Movie {
 		this.title = title;
 		this.ageLimit = ageLimit;
 	}
+  
 	
 	public Movie(String title, String director, String actor, Date onDate, int runtime, int ageLimit, String synopsis) {
 		super();
@@ -143,6 +142,19 @@ public class Movie {
 		this.status = status;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Movie [movieNo=" + movieNo + ", title=" + title + ", runtime=" + runtime + ", director=" + director
+				+ ", actor=" + actor + ", ageLimit=" + ageLimit + ", synopsis=" + synopsis + ", onDate=" + onDate
+				+ ", status=" + status + "]";
+	}
+
+	public boolean isEquals(Integer movieNo) {
+		if (movieNo == null) {
+			return false;
+		}
+		return this.movieNo == movieNo.intValue();
+	}
+
 }
 
