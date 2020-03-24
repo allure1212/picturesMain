@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String msg = (String)session.getAttribute("msg");
+	String contextPath = request.getContextPath();
+%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,17 +14,14 @@
     
 </head>
 <style>
-    div{;
+    div{
         box-sizing: border-box;
         }
 
-    #wrap{
-        width: 1000px;
-        height: 800px;
-    }
+
     #top{
         width: 100%;
-        height: 7%;
+        height: 100px;
         background-color: darkgray;
       
     }
@@ -35,22 +36,11 @@
 
     }
     #navbar{
-        width: 20%;
+        width: 15%;
         height: 100%;
         float: left;
         line-height: 80px;
         
-    }
-    #session{
-        float: left;
-        width:80%;
-        height:100%;
-   
-    }
-
-    #footer{
-        width:100%;
-        height:5%;
     }
 
     .listBtn{
@@ -61,7 +51,7 @@
 
     }
     .listBtn:hover{
-        background-color: grady;
+        background-color: gray;
     }
     .menu{
         text-align: center;
@@ -75,13 +65,17 @@
         
 
     }
+    .detail:hover{
+    	cursor:pointer;
+    	color:gray;
+    }
 
 
 
 
 </style>
 <body>
-   <div id="wrap">
+
        
 
     <div id="top">
@@ -89,51 +83,50 @@
          
     </div>
 
-    <div id="body">
+   
 
         <div id="navbar">
             <button class="listBtn">영화관리</button>
             <div class="menu">
-                <label>새영화등록</label><br>
-                <label>상영예정작</label><br>
-                <label>현재상영작</label><br>
-                <label>지난상영작</label>
+                <label class="detail">새영화등록</label><br>
+                <label class="detail">상영예정작</label><br>
+                <label class="detail">현재상영작</label><br>
+                <label class="detail">지난상영작</label>
             </div>
             
             <button class="listBtn">영화관 관리</button>
             <div class="menu">
-                <label>영화관 목록</label><br>
-                <label>영화관 등록</label><br>
-                <label>상영관리</label><br>
+                <label class="detail">영화관 목록</label><br>
+                <label class="detail">영화관 등록</label><br>
+                <label class="detail">상영관리</label><br>
                 
             </div>
             <button class="listBtn">회원관리</button>
             <div class="menu">
-                <label>회원 리스트</label><br>
-                <label>블랙 리스트</label><br>
+                <label class="detail">회원 리스트</label><br>
+                <label class="detail">블랙 리스트</label><br>
                 
             </div>
             <button class="listBtn">게시물관리</button>
             <div class="menu">
-                <label>1:1 문의</label><br>
-                <label>FAQ</label><br>
-                <label>공지사항</label><br>
-                <label>리뷰</label><br>
-                <label>대관문의</label><br>
-                <label>분실물관리</label><br>
-                <label>광고관리</label>
+                <label class="detail">1:1 문의</label><br>
+                <label class="detail" onclick="goFaq();">FAQ</label><br>
+                <label class="detail" onclick="goNotice();">공지사항</label><br>
+                <label class="detail" onclick="goReview();">리뷰</label><br>
+                <label class="detail" onclick="goBorrowRoom();">대관문의</label><br>
+                <label class="detail" onclick="goLostarticle();">분실물관리</label><br>
+                <label class="detail">광고관리</label>
             </div>
             <button class="listBtn">통계관리</button>
             <div class="menu">
-                <label>방문자 통게</label><br>
-                <label>장르별 영화예매 통계</label><br>
-                <label>성별 영화 예매 통계</label><br>
-                <label>나이별 영화 예매 통계</label><br>
-                <label>매출 통계</label>
-            </div>
-            
-
+                <label class="detail">방문자 통게</label><br>
+                <label class="detail">장르별 영화예매 통계</label><br>
+                <label class="detail">성별 영화 예매 통계</label><br>
+                <label class="detail">나이별 영화 예매 통계</label><br>
+                <label class="detail">매출 통계</label>
+            </div>         
         </div>
+
 
         <script>
             $(document).ready(function(){
@@ -154,32 +147,35 @@
                 });
 
             });
+			
+            function goFaq(){
+    			location.href = "<%=contextPath %>/list.fq";
+    		}
+            
+            function goNotice(){
+    			location.href = "<%=contextPath %>/list.fq";
+    		}
+            
+            function goReview(){
+    			location.href = "<%=contextPath %>/list.fq";
+    		}
+            
+            function goBorrowRoom(){
+    			location.href = "<%=contextPath %>/adminList.br";
+    		}
+            
+            function goLostarticle(){
+    			location.href = "<%=contextPath %>/list.fq";
+    		}
 
 
         </script>
 
 
-      
-
-        <div id="session"></div>
-     
-    </div>
-
-    <div id="footer">
-
-
-    </div>
 
 
 
 
-   
-
-
-
-
-
-</div>
 
 
 

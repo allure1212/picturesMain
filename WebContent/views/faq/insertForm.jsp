@@ -4,14 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>index.jsp</title>
+<title>Insert title here</title>
 </head>
 <body>
-	
-	<!-- 커밋 연습 -->
-	<%@ include file="/views/common/admin.jsp" %>
 
 </body>
 </html>
-
-
