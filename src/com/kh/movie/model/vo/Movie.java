@@ -1,5 +1,6 @@
 package com.kh.movie.model.vo;
 
+import java.sql.Date;
 
 public class Movie {
 	/* MOVIE_NO */
@@ -24,11 +25,12 @@ public class Movie {
 	private String synopsis;
 
 	/* ON_DATE */
-	private Object onDate;
+	private Date onDate;
 
 	/* STATUS */
 	private String status;
 	
+
 	public Movie() {
 		
 	}
@@ -38,6 +40,34 @@ public class Movie {
 		this.movieNo = movieNo;
 		this.title = title;
 		this.ageLimit = ageLimit;
+	}
+  
+	
+	public Movie(String title, String director, String actor, Date onDate, int runtime, int ageLimit, String synopsis) {
+		super();
+		this.title = title;
+		this.runtime = runtime;
+		this.director = director;
+		this.actor = actor;
+		this.ageLimit = ageLimit;
+		this.synopsis = synopsis;
+		this.onDate = onDate;
+	}
+	
+	public Movie(int movieNo, String title, int runtime, int ageLimit, Date onDate) {
+		super();
+		this.movieNo = movieNo;
+		this.title = title;
+		this.runtime = runtime;
+		this.ageLimit = ageLimit;
+		this.onDate = onDate;
+	}
+	
+	public boolean isEquals(Integer movieNo) {
+		if (movieNo == null) {
+			return false;
+		}
+		return this.movieNo == movieNo.intValue();
 	}
 
 	public int getMovieNo() {
@@ -96,11 +126,11 @@ public class Movie {
 		this.synopsis = synopsis;
 	}
 
-	public Object getOnDate() {
+	public Date getOnDate() {
 		return onDate;
 	}
 
-	public void setOnDate(Object onDate) {
+	public void setOnDate(Date onDate) {
 		this.onDate = onDate;
 	}
 

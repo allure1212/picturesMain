@@ -59,10 +59,9 @@ public void setScreenNo(int screenNo) {
 	this.screenNo = screenNo;
 }
 
-
 @Override
 public String toString() {
 	return "Reserved [reservedNo=" + reservedNo + ", paymentNo=" + paymentNo + ", memberNo=" + memberNo + ", screenNo="
 			+ screenNo + "]";
 }
-}
+

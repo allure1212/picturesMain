@@ -131,7 +131,9 @@
                     </select>
                     <ul>
                     	<c:forEach items="${movieList}" var="m">
-                    		<li><a href="#selectMovie" onclick="selectMovie('${m.movieNo}')"><span class="grade_${m.ageLimit}">${m.ageLimit}</span><strong>${m.title}</strong></a></li>
+                    		<li><a href="#selectMovie" onclick="selectMovie('${m.movieNo}')">
+                    		<span class="grade_${m.ageLimit}">${m.ageLimit==0 ? 'All':m.ageLimit}</span>
+                    		<strong>${m.title}</strong></a></li>
                     	</c:forEach>
 
                     </ul>
@@ -182,6 +184,7 @@ $(document).ready(function(){
 		  dateFormat: "yy-mm-dd"
 	});
 });
+
 function changeLocation(sectionNo) {
 	var form = document.getElementById('form');
 	if (!sectionNo) {
@@ -210,6 +213,7 @@ function selectTheater(theaterNo) {
 
 function selectMovie(movieNo){
 	var form = document.getElementById('form');
+	var datepicker = document.getElementById('datepicker');
 	
 	if (!form.sectionNo.value) {
 		return alert('지역을 선택해 주세요');
@@ -220,6 +224,7 @@ function selectMovie(movieNo){
 	if (!movieNo){
 		return alert('영화를 선택해주세요');
 	}
+	form.screenDate.value = datepicker.value;
 	form.movieNo.value = movieNo;
 	form.action = '${contextPath}/reservedThree.do';
 	form.method = 'post';

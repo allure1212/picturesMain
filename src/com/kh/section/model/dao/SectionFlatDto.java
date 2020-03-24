@@ -1,6 +1,12 @@
 package com.kh.section.model.dao;
 
 public class SectionFlatDto {
+
+	private Integer sectionNo;
+	private String sectionName;
+	private Integer theaterNo;
+	private String theaterName;
+	
 	
 	public Integer getSectionNo() {
 		return sectionNo;
@@ -34,11 +40,6 @@ public class SectionFlatDto {
 		this.theaterName = theaterName;
 	}
 
-	private Integer sectionNo;
-	private String sectionName;
-	private Integer theaterNo;
-	private String theaterName;
-	
 	public SectionFlatDto(Integer sectionNo, String sectionName, Integer theaterNo, String theaterName) {
 		this.sectionNo = sectionNo;
 		this.sectionName = sectionName;

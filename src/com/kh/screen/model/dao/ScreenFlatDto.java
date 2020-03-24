@@ -13,6 +13,7 @@ public class ScreenFlatDto {
 	private String title;
 	private Integer ageLimit;
 	private Date screenDate;
+	
 	public Integer getTheaterNo() {
 		return theaterNo;
 	}

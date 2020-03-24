@@ -30,9 +30,10 @@
         }
       
         #reserved_choose2 {background:#eee; padding:10px; overflow: hidden; width:1100px; margin-right: auto; margin-left: auto; border-radius: 3px;]}
-        #reserved_choose2 #choose_mem {position: relative; background:#333; height:100px; padding-left:100px;}
+        #reserved_choose2 #choose_mem {position: relative; background:#333; height:120px; padding-left:100px;}
         #reserved_choose2 #choose_mem .title{position:absolute; left:0; top:0; background:#5E5E5E; color:#fff; padding:10px; }
-        .poster_area { width:80px; height:80px; margin-top:10px; background:pink; float:left;}
+        .poster_area { width:80px; height:100px; margin-top:10px; background:pink; float:left;}
+        .poster_area img { width:100%; height:100%;}
         .select_area { float:left; margin:30px 0 0 75px;}
         .select_area select{ height:40px; line-height:40px; width:150px; margin-right:10px; border-radius:5px;}
 
@@ -81,7 +82,7 @@
                 <div id="choose_mem">
                     <div class="title">인원선택</div>
                     <div class="poster_area">
-                        <img src="" alt="" />
+                        <img src="${contextPath}/resources/images/${mainPoster}" alt="" />
                     </div>
                     <div class="select_area">
                         <select name="adult" class="countNum" onchange="changeNum(this)">
@@ -190,6 +191,7 @@
    
 <form id="form" action="${contextPath}/reservedOne.do" role="form" method="post">
 	<input type="hidden" name="screenNo" value="${screenNo}"/>
+	<input type="hidden" name="totalCost" value=""/>
 </form>
     
 <script>
@@ -262,6 +264,7 @@
 	
 	function next(){
 		var sumNum = getTotalCount(adult, youth, senior, disabled);
+		var totalCost = getTotalCost(adult, youth, senior, disabled);
 		var $chekcedSeats = $seats.filter(':checked');
 		var checkedSeatCount = $seats.filter(':checked').length;
 		var form = document.getElementById('form');
@@ -277,12 +280,8 @@
 		// seatNo 
 		// input[name=seatNo]
 		// input[name=seatNo]
-		// input[name=seatNo]
-		// input[name=seatNo]
-		
+
 		// fragment 가짜 DOM객체
-		// 
-		
 		var fragment = document.createDocumentFragment();
 		
 		$chekcedSeats.each(function() {
@@ -292,6 +291,20 @@
 			fragment.appendChild(input);
 			
 		});
+		
+		
+// 		var adult = document.querySelector(".select_area > select[name=adult]");
+// 		var youth = document.querySelector(".select_area > select[name=youth]");
+// 		var senior = document.querySelector(".select_area > select[name=senior]");
+// 		var disabled = document.querySelector(".select_area > select[name=disabled]");
+		var $select = $('.select_area > .countNum');
+		$select.each(function() {
+			var input = document.createElement('input');
+			input.name = this.name;
+			input.value = this.value;
+			fragment.appendChild(input);
+		});
+		
 		// DOM
 		// Document Object Model
 		
@@ -299,10 +312,12 @@
 		// input
 		// </form>
 		form.appendChild(fragment);
+		form.totalCost.value = totalCost;
 		form.action = '${contextPath}/reservedFive.do';
 		form.method = 'post';
 		form.submit();
-	}
+	};
+
 	
 	
 </script>
