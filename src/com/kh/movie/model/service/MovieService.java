@@ -21,10 +21,10 @@ public class MovieService {
 	 * @param theaterNo �궗�슜�옄媛� �꽑�깮�븳 �쁺�솕愿�
 	 * @return	�쐞 �꽑�깮�맂 吏��뿭/�쁺�솕愿��뿉�꽌 �긽�쁺以묒씤 �쁺�솕 由ъ뒪�듃
 	 */
-	public List<Movie> selectScreen(String theaterNo) {
+	public List<Movie> selectScreen(String theaterNo, String screenDate) {
 		Connection conn = getConnection();
 		
-		List<Movie> list = new MovieDao().selectScreen(conn, theaterNo);
+		List<Movie> list = new MovieDao().selectScreen(conn, theaterNo, screenDate);
 	
 		close(conn);
 		return list;

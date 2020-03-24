@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.common.DateUtils;
+import com.kh.common.StringUtils;
 import com.kh.movie.model.service.MovieService;
 import com.kh.movie.model.vo.Movie;
 import com.kh.section.model.service.SectionService;
@@ -28,6 +30,12 @@ public class ReservedTwoView extends HttpServlet {
 		String sectionNo = request.getParameter("sectionNo");
 		String theaterNo = request.getParameter("theaterNo");
 		
+		String screenDate = request.getParameter("screenDate");
+		
+		if(StringUtils.isEmpty(screenDate)) {
+			screenDate = DateUtils.getNowDateString();
+		}
+		
 		if(!isInteger(request.getParameter("sectionNo")) || !isInteger(request.getParameter("theaterNo"))) {
 			request.getRequestDispatcher("views/reserved/reservedOneView.jsp").forward(request, response);
 			return;
@@ -35,7 +43,7 @@ public class ReservedTwoView extends HttpServlet {
 			
 		List<Section> sList = new SectionService().selectAll();
 		List<Theater> tList = new TheaterService().selectAllBySection(sectionNo);
-		List<Movie> mList = new MovieService().selectScreen(theaterNo);
+		List<Movie> mList = new MovieService().selectScreen(theaterNo, screenDate);
 		
 		request.setAttribute("sectionList", sList);
 		request.setAttribute("theaterList", tList);

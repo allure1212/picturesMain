@@ -31,7 +31,7 @@ public class MovieDao {
 		}
 	
 	}
-	public List<Movie> selectScreen(Connection conn, String theaterNo) {
+	public List<Movie> selectScreen(Connection conn, String theaterNo, String screenDate) {
 		List<Movie> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
@@ -41,6 +41,7 @@ public class MovieDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, theaterNo);
+			pstmt.setString(2, screenDate);
 			
 			rset = pstmt.executeQuery();
 			while(rset.next()) {

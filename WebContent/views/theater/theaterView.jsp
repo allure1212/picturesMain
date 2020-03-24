@@ -21,23 +21,33 @@
 <title>Insert title here</title>
 <style>
     * {margin:0; padding:0}
-    .layout{ background: black; color: whitesmoke; width: 1200px; margin: 0 auto; padding:50px;}
+    .layout{ width: 1000px; margin: 0 auto; padding:50px;}
     .title {
-        background: #555; width: 200px;
-        font-size: 30px; line-height: 50px;
-        text-align: center;
-        border-radius: 50px;
+        width: 300px; font-size: 50px; line-height: 50px;
+        text-align: center; font-weight: 800;
         margin-bottom: 50px;
         }
-    .theaterInfo { height:500px; width: 50%; float: left; box-sizing: border-box;}
+    .theaterInfo { height:300px; width: 50%; float: left; box-sizing: border-box;}
+   	
     .theaterInfo p{
         padding: 10px;
         padding-left: 50px;
         font-size: 20px;
         font-weight: 700;
     }
-    .theaterInfo p a{
-        font-size: 15px;
+    .theaterInfo span{
+        padding: 10px;
+        padding-left: 30px;
+        font-size: 25px;
+        font-weight: 700;
+    }
+    .theaterInfo span img{
+        height: 30px; width: 30px;
+        padding: 10px; padding-right: 15px;
+        vertical-align: middle;
+        }
+    .theaterInfo span a{
+        font-size: 20px; padding: 10px; cursor: pointer;
     }
     .theaterMap{
         height: 250px;
@@ -68,10 +78,11 @@
         <p>영화관 소개</p>
         <p> 주   소 : <%= t.getAddress() %></p>
         <p>전화번호: <%= t.getPhone() %></p>
-        <p><img src="" alt="" /><a>#교통안내</a> <img src="" alt="" /><a>#주차안내</a></p>
+        <span><a><img src="<%=contextPath%>/resources/images/transport.png" alt="" />#교통안내</a></span>
+        <span><a><img src="<%=contextPath%>/resources/images/location_car_40.png" alt="" />#주차안내</a></span>
     </div>
     <div class="theaterInfo">
-        <p>영화관 위치</p>
+        <span><a><img src="<%=contextPath%>/resources/images/location_map_40.png" alt="" />영화관 위치</a></span>
         <div class="theaterMap">
         
         </div>

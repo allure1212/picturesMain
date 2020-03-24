@@ -3,7 +3,6 @@ package com.kh.reserved.controller;
 import static com.kh.common.isInteger.isInteger;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.mem_code.model.service.MemCodeService;
-import com.kh.mem_code.model.vo.MemCode;
 import com.kh.mem_code.model.vo.MemCodes;
+import com.kh.still_image.model.service.StillImageService;
 
 @WebServlet("/reservedFour.do")
 public class ReservedFourView extends HttpServlet {
@@ -33,13 +32,16 @@ public class ReservedFourView extends HttpServlet {
 			request.getRequestDispatcher("views/reserved/reservedOneView.jsp").forward(request, response);
 			return;
 		}
+		
 		MemCodes memCodes = new MemCodes(new MemCodeService().selectAll());
+		String mainPoster = new StillImageService().selectMain(movieNo);
 			
 		request.setAttribute("sectionNo", sectionNo);
 		request.setAttribute("theaterNo", theaterNo);
 		request.setAttribute("movieNo", movieNo);
 		request.setAttribute("screenNo", screenNo);
 		request.setAttribute("memCode", memCodes.getMemCodes());
+		request.setAttribute("mainPoster", mainPoster);
 		request.setAttribute("adultCost", memCodes.findCostByType("ADULT"));
 		request.setAttribute("youthCost", memCodes.findCostByType("YOUTH"));
 		request.setAttribute("seniorCost", memCodes.findCostByType("SENIOR"));
