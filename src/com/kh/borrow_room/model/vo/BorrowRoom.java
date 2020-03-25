@@ -1,5 +1,11 @@
 package com.kh.borrow_room.model.vo;
 
+import java.sql.Date;
+
+/**
+ * @author 이하진
+ *
+ */
 public class BorrowRoom {
    /* BORROW_ROOM_NO */
    private int borrowRoomNo;
@@ -29,13 +35,13 @@ public class BorrowRoom {
    private int disabledCount;
 
    /* HOPE_DATE */
-   private Object hopeDate;
+   private Date hopeDate;
 
    /* CONTENT */
    private String content;
 
    /* REGI_DATE */
-   private Object regiDate;
+   private Date regiDate;
 
    /* EMAIL */
    private String email;
@@ -43,5 +49,182 @@ public class BorrowRoom {
    /* REPLY_STATUS */
    private String replyStatus;
 
+   
+   public BorrowRoom() {
+	   
+   }
 
+
+public BorrowRoom(int borrowRoomNo, int memberNo, String title, String secretStatus, String secretPwd, int adultCount,
+		int youthCount, int seniorCount, int disabledCount, Date hopeDate, String content, Date regiDate, String email,
+		String replyStatus) {
+	super();
+	this.borrowRoomNo = borrowRoomNo;
+	this.memberNo = memberNo;
+	this.title = title;
+	this.secretStatus = secretStatus;
+	this.secretPwd = secretPwd;
+	this.adultCount = adultCount;
+	this.youthCount = youthCount;
+	this.seniorCount = seniorCount;
+	this.disabledCount = disabledCount;
+	this.hopeDate = hopeDate;
+	this.content = content;
+	this.regiDate = regiDate;
+	this.email = email;
+	this.replyStatus = replyStatus;
+}
+
+
+public int getBorrowRoomNo() {
+	return borrowRoomNo;
+}
+
+
+public void setBorrowRoomNo(int borrowRoomNo) {
+	this.borrowRoomNo = borrowRoomNo;
+}
+
+
+public int getMemberNo() {
+	return memberNo;
+}
+
+
+public void setMemberNo(int memberNo) {
+	this.memberNo = memberNo;
+}
+
+
+public String getTitle() {
+	return title;
+}
+
+
+public void setTitle(String title) {
+	this.title = title;
+}
+
+
+public String getSecretStatus() {
+	return secretStatus;
+}
+
+
+public void setSecretStatus(String secretStatus) {
+	this.secretStatus = secretStatus;
+}
+
+
+public String getSecretPwd() {
+	return secretPwd;
+}
+
+
+public void setSecretPwd(String secretPwd) {
+	this.secretPwd = secretPwd;
+}
+
+
+public int getAdultCount() {
+	return adultCount;
+}
+
+
+public void setAdultCount(int adultCount) {
+	this.adultCount = adultCount;
+}
+
+
+public int getYouthCount() {
+	return youthCount;
+}
+
+
+public void setYouthCount(int youthCount) {
+	this.youthCount = youthCount;
+}
+
+
+public int getSeniorCount() {
+	return seniorCount;
+}
+
+
+public void setSeniorCount(int seniorCount) {
+	this.seniorCount = seniorCount;
+}
+
+
+public int getDisabledCount() {
+	return disabledCount;
+}
+
+
+public void setDisabledCount(int disabledCount) {
+	this.disabledCount = disabledCount;
+}
+
+
+public Date getHopeDate() {
+	return hopeDate;
+}
+
+
+public void setHopeDate(Date hopeDate) {
+	this.hopeDate = hopeDate;
+}
+
+
+public String getContent() {
+	return content;
+}
+
+
+public void setContent(String content) {
+	this.content = content;
+}
+
+
+public Date getRegiDate() {
+	return regiDate;
+}
+
+
+public void setRegiDate(Date regiDate) {
+	this.regiDate = regiDate;
+}
+
+
+public String getEmail() {
+	return email;
+}
+
+
+public void setEmail(String email) {
+	this.email = email;
+}
+
+
+public String getReplyStatus() {
+	return replyStatus;
+}
+
+
+public void setReplyStatus(String replyStatus) {
+	this.replyStatus = replyStatus;
+}
+
+
+@Override
+public String toString() {
+	return "BorrowRoom [borrowRoomNo=" + borrowRoomNo + ", memberNo=" + memberNo + ", title=" + title
+			+ ", secretStatus=" + secretStatus + ", secretPwd=" + secretPwd + ", adultCount=" + adultCount
+			+ ", youthCount=" + youthCount + ", seniorCount=" + seniorCount + ", disabledCount=" + disabledCount
+			+ ", hopeDate=" + hopeDate + ", content=" + content + ", regiDate=" + regiDate + ", email=" + email
+			+ ", replyStatus=" + replyStatus + "]";
+}
+
+
+   
 }

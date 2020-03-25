@@ -21,17 +21,7 @@
 		text-align:center;
 		font-size:30px;
 	}
-		#listArea{
-		
-		float:left;
-		margin-top: 50px;
-		margin-left:30px;
-		width:200px;
-		height:350px;
-		color:white;
-		border-radius:10px;
-		background-color:white;
-	}
+	
 	.list{
 		display:block;
 		border-radius:10px;
@@ -98,6 +88,16 @@
 	    height:50px;
 	    
 	}
+	ul li{list-style: none;}
+        #noticeMenu {position:absolute; width:250px; left:0; top:40px; }
+        #noticeMenu h2{width:100%; height:100px; background:#9C0E0E; color:#fff; text-align: center; line-height:100px;}
+        #noticeMenu ul {border-left:1px solid #ddd; border-right:1px solid #ddd;}
+        #noticeMenu ul li{border-bottom:1px solid #ddd; padding:15px; box-sizing: border-box;}
+        #noticeMenu ul li a{display:block; text-decoration:none; color:#616060; }
+        #noticeMenu ul li a img{display:inline-block; vertical-align: middle; margin-right:15px;}
+        #noticeMenu ul li a span{display:inline-block; vertical-align: middle;}
+		#noticeMenu{margin-left:200px; margin-top:300px;}
+		#mainArea1{margin-left:320px;}
 	
 </style>
 </head>
@@ -110,14 +110,18 @@
 		<div class="topTitle">고객센터</div><div id="line"></div>
 		<hr width="500px" color="gray">
 		
-	<div id="listArea">
-		<div class="list">공지사항</div>
-		<div class="list">FAQ</div>
-		<div class="list">1:1문의</div>
-		<div class="list">분실물찾기</div>
-		<div class="list">대관문의</div>
-	</div>
-		
+	    <div class="container">
+        <div id="noticeMenu">
+            <h2>고객센터</h2>
+            <ul>
+                <li><a href=""><img src="resources/images/req1.png" alt=""><span>1:1문의</span></a></li>
+                <li><a href=""><img src="resources/images/req2.png" alt="">FAQ</a></li>
+                <li><a href=""><img src="resources/images/req3.png" alt="">공지사항</a></li>
+                <li><a href=""><img src="resources/images/req4.png" alt="">분실물찾기</a></li>
+                <li><a href=""><img src="resources/images/req5.png" alt="">대관문의</a></li>
+            </ul>
+        </div>
+        
 	<div class="mainArea" id="mainArea1">
 	<img src="../../resources/images/zoom2.png" width="60px" height="60px" align="center"><br><br><br>
 	<p class="mainContent" align="center">자주 찾는 질문</p>
