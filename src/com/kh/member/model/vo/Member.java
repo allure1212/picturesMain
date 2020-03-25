@@ -36,30 +36,8 @@ public class Member {
 	/* BLACK_COUNT */
 	private int blackCount;
 
+	public Member() {}
 	
-	public Member() {
-
-	}
-	
-	/**
-	 * 전체 조회용
-	 * @param memberNo
-	 * @param grade
-	 * @param id
-	 * @param pwd
-	 * @param name
-	 * @param birth
-	 * @param email
-	 * @param phone
-	 * @param tel
-	 * @param gender
-	 * @param ticketCount
-	 * @param signupDate
-	 * @param status
-	 * @param blackStatus
-	 * @param blackCause
-	 * @param blackCount
-	 */
 	public Member(int memberNo, String grade, String id, String pwd, String name, Object birth, String email,
 			String phone, String tel, String gender, int ticketCount, Date signupDate, String status,
 			String blackStatus, String blackCause, int blackCount) {
@@ -80,47 +58,6 @@ public class Member {
 		this.blackStatus = blackStatus;
 		this.blackCause = blackCause;
 		this.blackCount = blackCount;
-	}
-	
-	
-	
-
-	/**
-	 * 회원가입용
-	 * @param id
-	 * @param pwd
-	 * @param name
-	 * @param birth
-	 * @param email
-	 * @param phone
-	 * @param tel
-	 * @param gender
-	 */
-	public Member(String id, String pwd, String name, Object birth, String email, String phone, String tel,
-			String gender) {
-		super();
-		this.id = id;
-		this.pwd = pwd;
-		this.name = name;
-		this.birth = birth;
-		this.email = email;
-		this.phone = phone;
-		this.tel = tel;
-		this.gender = gender;
-	}
-
-	/**
-	 * 수정용
-	 * @param email
-	 * @param phone
-	 * @param tel
-	 */
-	public Member(String email, String phone, String tel, String id) {
-		super();
-		this.email = email;
-		this.phone = phone;
-		this.tel = tel;
-		this.id = id;
 	}
 
 	public int getMemberNo() {
