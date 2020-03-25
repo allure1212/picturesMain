@@ -55,16 +55,16 @@
     <div class="sub-tabs">
         <ul>
             <li >
-            	<a href="infoChange.me">회원정보</a>
+            	<a href="<%=request.getContextPath()%>/infoChange.me">회원정보</a>
             		<ul>
 						<li>
-							<a href="infoChange.me">회원정보수정</a>
+							<a href="<%=request.getContextPath()%>/infoForm.me">회원정보수정</a>
 						</li>
 						<li>
-							<a href="updatePwdForm.me">비밀번호변경</a>
+							<a href="<%=request.getContextPath()%>/updatePwdForm.me">비밀번호변경</a>
 						</li>
 						<li>
-							<a href="delete.me">회원탈퇴</a>
+							<a href="<%=request.getContextPath()%>/deleteForm.me">회원탈퇴</a>
 						</li>
 					</ul>
             </li>
@@ -80,13 +80,13 @@
 					</ul>
             </li>
             <li >
-            	<a href="pickMovie.do">My 영화</a>
+            	<a href="<%=request.getContextPath()%>/pickMovie.do">My 영화</a>
             		<ul>
 						<li>
-							<a href="pickMovie.do">찜한 영화</a>
+							<a href="<%=request.getContextPath()%>/pickMovie.do">찜한 영화</a>
 						</li>
 						<li>
-							<a href="watchedMovie.do">관람한 영화</a>
+							<a href="<%=request.getContextPath()%>/watchedMovie.do">관람한 영화</a>
 						</li>
 					</ul>
             </li>

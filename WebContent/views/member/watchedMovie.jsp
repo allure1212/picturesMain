@@ -98,7 +98,7 @@
     <hr style="border:1px solid#878787; height: 2px !important; display: block !important; width: 100% !important;"/>
     <div class="btnWrap">
         <button class="button button-color01 block" id="idback" type="button">이전화면</button>
-        <button class="button button-color01 block" id="idnext" type="button">영화 찜하러 가기</button>
+        <button class="button button-color01 block" id="idnext" type="submit">영화 찜하러 가기</button>
     </div>
 
 </div>

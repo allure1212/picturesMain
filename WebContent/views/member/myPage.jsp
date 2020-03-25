@@ -143,7 +143,7 @@ body {
 			    			</tr>
 	    		</thead>
 	  		</table>
-	    		<button id="Question_more" onclick="location.href='#';">더보기</button>
+	    		<button id="Question_more" type="submit">더보기</button>
 	  		</div>
   		</div>
       </div>

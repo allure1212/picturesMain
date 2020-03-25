@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.member.model.vo.Member" %>
+<%
+	String msg = (String)request.getAttribute("msg");	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -207,7 +211,20 @@ line-height: 1.29;
 
 
 </style>
-
+<script>
+	var msg = "<%=msg%>";
+	
+	$(function(){
+		if(msg != "null"){
+			alert(msg);
+		}
+		
+		if(msg == "성공적으로 변경하였습니다."){
+			window.close();
+		}
+	});
+	
+</script>
 
 </head>
 <body>
@@ -224,11 +241,12 @@ line-height: 1.29;
 		<div class="body" style="margin-top: 80px;"></div>
 <!-- joining -->
 		<div class="joining scroll">
-			<form name="joinForm" id="memberVo" action="" method="post"  onsubmit="return checkAll()">
+			<form name="joinForm" id="memberVo" action="<%=request.getContextPath()%>/infoChange.me" method="post">
 
 <!-- enrollField -->
 		<div class="enrollField">
 			<p class="info"><span class="essential">*</span> 표시 항목은 필수입력사항입니다.</p>
+			
 				<table>
 					<colgroup>
 						<col style="width: 150px;">
@@ -238,19 +256,19 @@ line-height: 1.29;
 						<tr>
 							<th scope="row">아이디</th>
 							<td>
-								<input name="id" title="아이디" class="input id" required="" type="text" placeholder="" readonly>
+								<input name="id" title="아이디" class="input id" required="" type="text" value="<%= loginUser.getId() %>" style="border:none" readonly>
 								<!-- 사용불가 or 불일치 시 : input 'error' 클래스 -->
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">이름</th>
 							<td>
-								<input name="name" title="이름" class="input name" type="text" maxlength="20" required="" readonly>
+								<input name="name" title="이름" class="input name" type="text" value="<%= loginUser.getName() %>" style="border:none" readonly>
 							</td>
 						</tr>
 						<th scope="row"><span class="essential">*</span>이메일</th>
 							<td>
-								<input name="email" title="이메일" class="input mail" required="" type="email" maxlength="50" required="">
+								<input name="email" title="이메일" class="input mail" required="" type="email" maxlength="50">
 							</td>
 						</tr>
 						<tr>
@@ -267,11 +285,12 @@ line-height: 1.29;
 						</tr>
 					</tbody>
 				</table>
+            <div class="btnWrap">
+                <button class="button button-sizeL button-color01" id="joinSubmitBtn" type="submit">회원정보변경</button>
+            </div>
+			
             </div>
             
-            <div class="btnWrap">
-                <button class="button button-sizeL button-color01" id="joinSubmitBtn" onclick="enrollMember" type="submit">회원정보변경</button>
-            </div>
             <!-- //btnWrap -->
             
     </form>           

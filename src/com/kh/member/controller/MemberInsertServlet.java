@@ -54,6 +54,8 @@ public class MemberInsertServlet extends HttpServlet {
 		 session.setAttribute("msg", "회원 가입 성공!");
 		  
 		 response.sendRedirect(request.getContextPath());
+		 
+		 
 		  
 		 }else {
 		  

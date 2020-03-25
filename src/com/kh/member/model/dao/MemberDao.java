@@ -17,12 +17,15 @@ public class MemberDao {
 	private Properties prop = new Properties();
 	
 	public MemberDao() {
+		
 		String fileName = MemberDao.class.getResource("/sql/member/member-query.properties").getPath();
+		
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	public Member loginMember(Connection conn, String userId, String userPwd) {
@@ -71,7 +74,9 @@ public class MemberDao {
 		
 	}
 	
-public int insertMember(Connection conn, Member m) {
+	
+	public int insertMember(Connection conn, Member m) {
+		
 	int result = 0;
 	
 	PreparedStatement pstmt = null;
@@ -99,15 +104,16 @@ public int insertMember(Connection conn, Member m) {
 	
 	return result;
 	
-}
 
+	}
 
-
+	
 	public Member selectMember(Connection conn, String userId) {
 	
 	Member mem = null;
 	
 	PreparedStatement pstmt = null;
+	
 	ResultSet rset = null;
 	
 	String sql = prop.getProperty("selectMember");
@@ -149,8 +155,34 @@ public int insertMember(Connection conn, Member m) {
 	}
 
 	
+	public int updateMember(Connection conn, Member m) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateMember"); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getEmail());
+			pstmt.setString(2, m.getPhone());
+			pstmt.setString(3, m.getTel());
+			pstmt.setString(4, m.getId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
-	public int updatePwdMember(Connection conn, String userId, String userPwd, String newPwd) {
+	
+	public int updatePwdMember(Connection conn, String id, String userPwd, String newPwd) {
 	
 	int result = 0;
 	
@@ -161,7 +193,7 @@ public int insertMember(Connection conn, Member m) {
 	try {
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, newPwd);
-		pstmt.setString(2, userId);
+		pstmt.setString(2, id);
 		pstmt.setString(3, userPwd);
 		
 		result = pstmt.executeUpdate();		
@@ -173,7 +205,61 @@ public int insertMember(Connection conn, Member m) {
 	}
 	
 	return result;
+	
 	}
 	
+	
+	public int deleteMember(Connection conn, String userId, String userPwd) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userPwd);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public int findId(Connection conn, String id, String name, String email) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("findId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			pstmt.setString(3, email);
+
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+		
+	}
 	
 }

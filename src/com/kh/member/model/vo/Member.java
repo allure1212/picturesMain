@@ -109,6 +109,20 @@ public class Member {
 		this.gender = gender;
 	}
 
+	/**
+	 * 수정용
+	 * @param email
+	 * @param phone
+	 * @param tel
+	 */
+	public Member(String email, String phone, String tel, String id) {
+		super();
+		this.email = email;
+		this.phone = phone;
+		this.tel = tel;
+		this.id = id;
+	}
+
 	public int getMemberNo() {
 		return memberNo;
 	}

@@ -299,7 +299,7 @@ line-height: 1.29;
             </div>
             
             <div class="btnWrap">
-                <button class="button button-sizeL button-color01" id="joinSubmitBtn" onclick="enrollMember" type="submit">회원가입</button>
+                <button class="button button-sizeL button-color01" id="joinSubmitBtn" type="submit">회원가입</button>
             </div>
             <!-- //btnWrap -->
             
@@ -309,11 +309,7 @@ line-height: 1.29;
 </section>
 </div>
                 
-<script>
-    function enrollMember(){
-    location.href = "<%= request.getContextPath()%>/insert.me";
-    }
-</script>
+
 <script type="text/javascript"> 
 
 	$(function(){ $("#alert-success").hide(); 

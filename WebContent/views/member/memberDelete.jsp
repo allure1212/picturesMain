@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.member.model.vo.Member" %>
+<%
+	String msg = (String)request.getAttribute("msg");	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,6 +167,25 @@ input[type=number], input[type=password], input[type=tel], input[type=text], sel
 
 
 </style>
+<script type="text/javascript">
+    function cancle() {
+		location.href="mypage.me";
+    }
+</script>
+<script>
+	var msg = "<%=msg%>";
+	
+	$(function(){
+		if(msg != "null"){
+			alert(msg);
+		}
+		
+		if(msg == "성공적으로 회원탈퇴 되었습니다."){
+			window.close();
+		}
+	});
+	
+</script>
 </head>
 <body>
 
@@ -182,26 +205,55 @@ input[type=number], input[type=password], input[type=tel], input[type=text], sel
 	<div class="body">
 		<!-- pwd -->
 		<div class="formField pwd">
-			<form name="idForm" id="idForm" method="post">
+			<form name="idForm" id="idForm" onsubmit="return pwdValidate();" action="<%=request.getContextPath()%>/delete.me" method="post">
 				<fieldset>
 					<legend>회원탈퇴</legend>
 					<h2 class="title">회원탈퇴</h2>
 					<div class="item">
-						<input name="Pwd" title="비밀번호" class="input" id="idPwd" type="password" placeholder="새로운 비밀번호">
+						<input name="pwd" title="비밀번호" class="input" id="idPwd" type="password" placeholder="비밀번호">
                     </div>
                     <div class="item">
-						<input name="Pwdchk" title="비밀번호 확인" class="input" id="idPwdChk" type="password" placeholder="새로운 비밀번호 확인">
+						<input name="pwdChk" title="비밀번호 확인" class="input" id="idPwdChk" type="password" placeholder="비밀번호 확인">
 					</div>
 					<!-- btnWrap -->
 					<div class="btnWrap">
-                        <button class="button button-color01 block" id="idBtn" type="button">취소</button>
-                        <button class="button button-color01 block" id="idBtn" type="button">변경</button>
+                        <button class="button button-color01 block" id="idBtn" type="button" onclick="cancle()">취소</button>
+                        <button class="button button-color01 block" id="idBtn" type="submit">회원탈퇴</button>
 					</div>
 					<!-- //btnWrap -->
 				</fieldset>
 			</form>
-		</div></div>
+		</div>
+	</div>
 </section>
 </div>
+
+
+<script>
+
+
+		function pwdValidate(){
+			// 각 input 요소 가져오기
+			var pwd = $("input[name='pwd']");
+			var pwdChk = $("input[name='pwdChk']");
+			
+			
+			// 두 input 요소에 하나라도 누락되지 않았는지 검사
+			if(pwd.val().trim() == "" || pwdChk.val().trim() == ""){
+				alert("모든 비밀번호 입력해주세요.");
+				return false;
+			}
+			
+			// 변경할 비밀번호와 변경할 비밀번호 확인 값이 일치하는지 검사
+			if(pwd.val() != pwdChk.val()){
+				alert("비밀번호가 다릅니다. 다시입력해주세요");
+				pwdChk.val("").focus();
+				return false;
+			}
+	
+		}
+		
+		
+</script>
 </body>
 </html>

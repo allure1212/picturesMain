@@ -10,20 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberDeleteServlet
+ * Servlet implementation class MemberChangeInfoFormServlet
  */
-@WebServlet("/delete.me")
-public class MemberDeleteServlet extends HttpServlet {
+@WebServlet("/infoForm.me")
+public class MemberChangeInfoFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberDeleteServlet() {
+    public MemberChangeInfoFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,27 +32,11 @@ public class MemberDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userPwd = request.getParameter("pwd");
-		
 		HttpSession session = request.getSession();
-	
-		String userId = ((Member)session.getAttribute("loginUser")).getId();
-		
-		int result = new MemberService().deleteMember(userId, userPwd);
-		
-		if(result > 0) {
-			
-			session.removeAttribute("loginUser");
-			session.setAttribute("msg", "회원 탈퇴가 완료되었습니다.");
-			response.sendRedirect(request.getContextPath());
-			
-		}else {
-			request.setAttribute("msg", "회원 탈퇴에 실패했습니다.");
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/member/memberDelete.jsp");
-			view.forward(request, response);
-		}
-		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		request.setAttribute("loginUser", loginUser);
+		RequestDispatcher view = request.getRequestDispatcher("views/member/memberInfoChange.jsp");
+		view.forward(request, response);
 	}
 
 	/**

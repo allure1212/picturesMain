@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.member.model.vo.Member" %>
+<%
+	String msg = (String)request.getAttribute("msg");	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -180,7 +184,7 @@ input[type=email], input[type=number], input[type=password], input[type=tel], in
 	<div class="body">
 		<!-- login -->
 		<div class="formField login">
-			<form name="idForm" id="idForm" method="post">
+			<form name="idForm" action="<%=request.getContextPath()%>/findId.me" id="idForm" method="post">
 				<fieldset>
 					<legend>아이디 찾기</legend>
 					<h2 class="title">아이디 찾기</h2>
@@ -192,12 +196,13 @@ input[type=email], input[type=number], input[type=password], input[type=tel], in
 					</div>
 					<!-- btnWrap -->
 					<div class="btnWrap">
-						<button class="button button-color01 block" id="idBtn" type="button">아이디 찾기</button>
+						<button class="button button-color01 block" id="idBtn" type="submit">아이디 찾기</button>
 					</div>
 					<!-- //btnWrap -->
 				</fieldset>
 			</form>
-		</div></div>
+		</div>
+	</div>
 </section>
 </div>
 </body>

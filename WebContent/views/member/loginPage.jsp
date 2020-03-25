@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.member.model.vo.Member" %>    
+<%@ page import="com.kh.member.model.vo.Member" %>
 
 
 <!DOCTYPE html>
@@ -184,32 +184,27 @@
             <p class="title_sub">Pictures에 오신 것을 환영 합니다.</p>
         </div>
         <div class="section">
-            <form name="loginFrm" style="margin:0" action="login.me" method="post" onsubmit="return loginValidate();">
+            <form name="loginFrm" style="margin:0" action="<%=request.getContextPath()%>/login.me" method="post" onsubmit="return loginValidate();">
             	<p class="gray text14 tc">로그인을 위하여 아래 아이디와 비밀번호를 입력하여 주세요.</p>
             	<div class="login_input">
                     <input name="userId" tabindex="1" class="loginId" id="login_sub_id" type="text" size="16" placeholder="아이디" autocomplete="Off">
                     <input name="userPwd" tabindex="2" class="loginPw" id="login_main_pw" type="password" size="16" placeholder="비밀번호" autocomplete="Off">
             	</div>
 	
-		<input style="display:block; width:100%; height:80px; line-height:80px; background:#23b9ff; font-size:20px; font-weight:500; color:#fff; text-align:center; cursor:pointer;" onclick="loginme" type="submit" readonly="readonly" value="로그인">
+		<input style="display:block; width:100%; height:80px; line-height:80px; background:#23b9ff; font-size:20px; font-weight:500; color:#fff; text-align:center; cursor:pointer;" type="submit" readonly="readonly" value="로그인">
     
         	</form>
         </div>
         <div class="section idCookie">
             <p class="fr">
-                <a href="enrollForm.me">회원가입</a><span class="bar"></span>
-                <a class="open_find_id" href="findId.me">아이디 찾기</a><span class="bar"></span>
-                <a class="open_find_pw" href="findPwd.me">비밀번호 찾기</a>
+                <a href="<%=request.getContextPath()%>/enrollForm.me">회원가입</a><span class="bar"></span>
+                <a class="open_find_id" href="<%=request.getContextPath()%>/findId.me">아이디 찾기</a><span class="bar"></span>
+                <a class="open_find_pw" href="<%=request.getContextPath()%>/findPwd.me">비밀번호 찾기</a>
             </p>
         </div>
     </div>
 
 </div>
 
-<script>
-	function loginme(){
-		location.href = "<%= request.getContextPath()%>/login.me";
-	}
-</script>
 </body>
 </html>

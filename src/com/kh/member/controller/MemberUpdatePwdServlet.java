@@ -34,23 +34,25 @@ public class MemberUpdatePwdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String userPwd = request.getParameter("Pwd");
-
 		String newPwd = request.getParameter("newPwd");
+
+		
 		
 		HttpSession session = request.getSession();
-		String userId = ((Member)session.getAttribute("loginUser")).getId();
+		String id = ((Member)session.getAttribute("loginUser")).getId();
+
+		int result = new MemberService().updatePwdMember(id, userPwd, newPwd);
 		
-		Member updateMem = new MemberService().updatePwdMember(userId, userPwd, newPwd);
-		
-		if(updateMem != null) {
-			request.setAttribute("msg", "성공적으로 비밀번호를 변경하였습니다.");
-			session.setAttribute("loginUser", updateMem);
+		if(result>0) {
+			request.setAttribute("msg", "비밀번호 변경이 완료되었습니다.");
+			RequestDispatcher view = request.getRequestDispatcher("views/member/updatePwdForm.jsp");
+			view.forward(request, response);
 		}else {
 			request.setAttribute("msg", "비밀번호 변경에 실패했습니다.");
+			RequestDispatcher view = request.getRequestDispatcher("views/member/updatePwdForm.jsp");
+			view.forward(request, response);
 		}
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/member/updatePwdForm.jsp");
-		view.forward(request, response);
 	
 	}
 

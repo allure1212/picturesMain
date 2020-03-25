@@ -54,17 +54,16 @@ public class MemberService {
 	}
 
 	
-
-	public Member updatePwdMember(String userId, String userPwd, String newPwd) {
+	public Member updateMember(Member m) {
 		Connection conn = getConnection();
 		
-		int result = new MemberDao().updatePwdMember(conn, userId, userPwd, newPwd);
+		int result = new MemberDao().updateMember(conn, m);
 		
 		Member updateMem = null;
 		
 		if(result > 0) {
 			commit(conn);
-			updateMem = new MemberDao().selectMember(conn, userId);
+			updateMem = new MemberDao().selectMember(conn, m.getId());
 		}else {
 			rollback(conn);
 		}
@@ -72,8 +71,63 @@ public class MemberService {
 		close(conn);
 		
 		return updateMem;
+		
 	}
 	
+
+	public int updatePwdMember(String id, String userPwd, String newPwd) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().updatePwdMember(conn, id, userPwd, newPwd);
+		
+		if(result > 0) {
+			commit(conn);
+			
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 	
+
+	public int deleteMember(String userId, String userPwd) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().deleteMember(conn, userId, userPwd);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
+	
+	public Member findId(String id, String name, String email) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().findId(conn, id, name, email);
+		
+		Member findIdMem = null;
+
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return findIdMem;
+		
+		
+		}
 	
 }

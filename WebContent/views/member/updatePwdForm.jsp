@@ -3,6 +3,7 @@
 <%
 	String msg = (String)request.getAttribute("msg");	
 %>
+<%@ page import="com.kh.member.model.vo.Member" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +18,18 @@
 			alert(msg);
 		}
 		
-		if(msg == "성공적으로 비밀번호를 변경하였습니다."){
+		if(msg == "성공적으로 회원탈퇴 되었습니다."){
 			window.close();
 		}
 	});
+	
 </script>
+<script type="text/javascript">
+    function cancle() {
+		location.href="mypage.me";
+    }
+</script>
+
 <style>
 * {
 	vertical-align: baseline;
@@ -199,6 +207,9 @@ input[type=number], input[type=password], input[type=tel], input[type=text], sel
 }
 
 </style>
+<script>
+
+</script>
 </head>
 <body>
 
@@ -225,7 +236,7 @@ input[type=number], input[type=password], input[type=tel], input[type=text], sel
 	<div class="body">
 		<!-- pwd -->
 		<div class="formField pwd">
-			<form name="idForm" id="idForm" action="<%=request.getContextPath()%>/updatePwd.me" method="post">
+			<form name="idForm" id="idForm" onsubmit="return pwdValidate();" action="<%=request.getContextPath()%>/updatePwd.me" method="post">
 				<fieldset>
 					<legend>비밀번호 변경</legend>
 					<h2 class="title">비밀번호 변경</h2>
@@ -233,48 +244,51 @@ input[type=number], input[type=password], input[type=tel], input[type=text], sel
 						<input name="Pwd" title="기존 비밀번호" class="input" id="pwd" type="password" placeholder="기존 비밀번호">
 					</div>
 					<div class="item">
-						<input name="NewPwd" title="새로운 비밀번호" class="input" id="NewPwd" type="password" placeholder="새로운 비밀번호">
+						<input name="newPwd" title="새로운 비밀번호" class="input" id="newPwd" type="password" placeholder="새로운 비밀번호">
                     </div>
                     <div class="item">
-						<input name="PwdChk" title="새로운 비밀번호 확인" class="input" id="NewPwdChk" type="password" placeholder="새로운 비밀번호 확인">
+						<input name="pwdChk" title="새로운 비밀번호 확인" class="input" id="newPwdChk" type="password" placeholder="새로운 비밀번호 확인">
 					</div>
 					<!-- btnWrap -->
 					<div class="btnWrap">
-                        <button class="button button-color01 block" id="idBtn" type="button">취소</button>
-                        <button class="button button-color01 block" id="idBtn" type="button">변경</button>
-                        <button type="submit" onclick="return pwdValidate();">변경하기</button>
+                        <button class="button button-color01 block" id="idBtn" type="button" onclick="cancle()">취소</button>
+                        <button class="button button-color01 block" id="idBtn" type="submit">변경</button>
 					</div>
 					<!-- //btnWrap -->
 				</fieldset>
 			</form>
-		</div></div>
+		</div>
+	</div>
 </section>
 </div>
 
 
 <script>
+
+
 		function pwdValidate(){
 			// 각 input 요소 가져오기
-			var Pwd = $("input[name='userPwd']");
-			var NewPwd = $("input[name='newPwd']");
-			var PwdChk = $("input[name='PwdChk']");
+			var Pwd = $("input[name='Pwd']");
+			var newPwd = $("input[name='newPwd']");
+			var pwdChk = $("input[name='pwdChk']");
 			
 			
 			// 세 input 요소에 하나라도 누락되지 않았는지 검사
-			if(Pwd.val().trim() == "" || NewPwd.val().trim() == "" || PwdChk.val().trim() == ""){
+			if(Pwd.val().trim() == "" || newPwd.val().trim() == "" || pwdChk.val().trim() == ""){
 				alert("모든 비밀번호 입력해주세요.");
 				return false;
 			}
 			
 			// 변경할 비밀번호와 변경할 비밀번호 확인 값이 일치하는지 검사
-			if(NewPwd.val() != PwdChk.val()){
+			if(newPwd.val() != pwdChk.val()){
 				alert("비밀번호가 다릅니다. 다시입력해주세요");
-				PwdChk.val("").focus();
+				pwdChk.val("").focus();
 				return false;
 			}
-			
-			return true;
+	
 		}
+		
+		
 </script>
 	
 </body>
