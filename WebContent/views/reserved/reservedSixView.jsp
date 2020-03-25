@@ -128,7 +128,7 @@
                         <li>결제번호 : ${paymentInfo.paymentNo}</li>
                         <li>결제방식 : ${paymentInfo.type}</li>
                         <li>결제금액 : 
-                        	<fmt:formatNumber value="${paymentInfo.amount}" pattern="#00,000"/>원
+                        	<fmt:formatNumber value="${paymentInfo.amount}" pattern="#0,000"/>원
                         </li>
 
                     </ul>

@@ -44,17 +44,18 @@
         .swiper-button-next {background-image: url(<%= request.getContextPath() %>/resources/images/visual_arrow_right.png);}
         .swiper-button-prev {background-image: url(<%= request.getContextPath() %>/resources/images/visual_arrow_left.png);}
         .swiper-pagination-bullet-active {background:red;}
-        /* .movie-posters{overflow: hidden;} */
         .movie-posters:after{content:""; display: block; clear: both;}
-        .movie-poster{ width: 16.8%; height: 280px; margin:40px 0 40px 4%; background:powderblue; float: left;}
+        .movie-poster { position:relative; width: 16.8%; height: 280px; margin:40px 0 40px 4%; background:powderblue; float: left;}
+        .movie-poster .rank { position:absolute; bottom:10px; left:10px; display:inline-block; color:#fff; font-size:30px; font-weight:900; font-style:italic;}
+        .movie-poster a {cursor: pointer; display:block;}
         .movie-poster img {width: 100%; height: 100%;}
         .movie-poster:nth-child(1){margin-left:0;}
         
         .movie-news:after{content:""; display: block; clear: both;}
         .movie-news > p {font-size: 35px; font-weight: 700; padding: 20px; padding-left: 40px;}
-        .movie-new{ width: 22%; height: 250px; float: left; margin-left:4%; margin-top:1%}
+        .movie-new { width: 22%; height: 250px; float: left; margin-left:4%; margin-top:1%}
         .movie-new.first{margin-left:0;}
-        .movie-new a {display:block;text-align:center;}
+        .movie-new a { display:block; text-align:center; cursor: pointer;}
         .movie-new a img {display:inline-block; width: 150px; height: 200px; background: lightsteelblue;}
         .movie-new .cont {padding:0 30px;}
         .movie-new .cont p {margin:7px; font-weight: 700;}
@@ -69,7 +70,8 @@
     <div class="swiper-wrapper">
     <% for(int i=0; i<5; i++ ){ %>
     	<div class="swiper-slide">
-        <img src="<%= request.getContextPath() %>/resources/images/<%= tmdSlide.get(i).getModifyName() %>" onerror="this.src='../../resources/images/noImage.jpg'" alt="" /></div>
+        <img src="<%= request.getContextPath() %>/resources/images/<%= tmdSlide.get(i).getModifyName() %>"
+        	 onerror="this.src='../../resources/images/noImage.jpg'" alt="" /></div>
     <% } %>
     </div>
     <!-- Add Pagination -->
@@ -80,55 +82,64 @@
   </div>
 
   <div class="movie-posters">
-  	<% for(int i=0; i<5; i++){ %>
-    <div class="movie-poster"><a><img src="<%= request.getContextPath() %>/resources/images/<%= tmdPoster.get(i).getModifyName() %>" onerror="this.src='../../resources/images/noImageMain.jpg'" alt="" /></a></div>
+  	<% if(tmdPoster.size()>= 5){%>
+	  	<% for(int i=0; i<5; i++){ %>
+	    <div class="movie-poster">
+	    	<span class="rank"><%=(i+1)%>.</span>
+	    	<a href="<%=contextPath%>/detail.mo?movieNo=<%=tmdPoster.get(i).getMovieNo()%>">
+	    		<img src="<%=request.getContextPath()%>/resources/images/<%= tmdPoster.get(i).getModifyName() %>"
+	    			 onerror="this.src='../../resources/images/noImageMain.jpg'" alt="" />
+	    	</a>
+	    </div>
+  	<% } }else{ %>
+  		<% for(int i=0; i<tmdPoster.size(); i++){ %>
+	    <div class="movie-poster">
+	    	<span class="rank"><%=(i+1)%>.</span>
+	    	<a href="<%=contextPath%>/detail.mo?movieNo=<%=tmdPoster.get(i).getMovieNo()%>">
+	    		<img src="<%= request.getContextPath() %>/resources/images/<%= tmdPoster.get(i).getModifyName() %>"
+	    			 onerror="this.src='../../resources/images/noImageMain.jpg'" alt="" />
+	    	</a>
+	    </div>
+  		<%} %>
+  		<% for(int i=0; i < 5-tmdPoster.size(); i++){ %>
+	    <div class="movie-poster">
+	    	<a>
+	    		<img src="<%= request.getContextPath() %>/resources/images/<%= tmdPoster.get(i).getModifyName() %>"
+	    			 onerror="this.src='../../resources/images/noImageMain.jpg'" alt="" />
+	    	</a>
+	    </div>
   	<% } %>
+  	<%} %>
   </div>
 
   <div class="movie-news">
     <p>상영예정작</p>
-	<!-- start visual slide -->
-	<% 
-		boolean isFirst = true;
+	<% boolean isFirst = true;
 		for(NewMoviesDto nmd: nm) { %>
  	   <div class="movie-new <%= isFirst ? "first" : "" %>">
-	      <a>
-	      	<img 
-	      		src="<%= request.getContextPath() %>/resources/images/<%= nmd.getModifyName() == null ? "noImageMain.jpg" : nmd.getModifyName() %>" 
-	      		alt="no-image"
-      		/>
+	      <a href="<%=contextPath%>/detail.mo?movieNo=<%=nmd.getMovieNo()%>">
+	      	<img src="<%= request.getContextPath() %>/resources/images/<%= nmd.getModifyName() == null ? "noImageMain.jpg" : nmd.getModifyName() %>"
+	      		 alt="no-image"/>
 	      </a>
 	      <div class="cont">
 	        <p>영화제목 : <%= nmd.getTitle() %></p>
 	        <p>영화개봉일 : <%= nmd.getOnDate() %> </p>
-	        <input type="hidden" value="<%= nmd.getMovieNo() %>"/>
 	      </div>
     	</div>
 	<%} %>
-	<%
-		for (int i = 0; i < 4 - nm.size(); i++) {
-	%>
+	<% for (int i = 0; i < 4 - nm.size(); i++) { %>
 	 	   <div class="movie-new <%= isFirst ? "first" : "" %>">
-	      <a>
-	      	<img 
-	      		src="<%= request.getContextPath() %>/resources/images/noImageMain.jpg" 
-	      		alt="no-image"
-      		/>
-	      </a>
+	      <a style="cursor:default;"><img src="<%= request.getContextPath() %>/resources/images/noImageMain.jpg" alt="no-image" /></a>
 	      <div class="cont">
 	        <p>영화제목 : 미개봉 </p>
 	        <p>영화개봉일 : 미개봉 </p>
-	        <input type="hidden" value=""/>
 	      </div>
     	</div>
-	<% 
-		}
-	%>
-	<!-- end visual slide -->
+	<% } %>
+	
  
   </div>
 </div>
-
 
 </body>
 </html>

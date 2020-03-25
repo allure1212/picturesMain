@@ -66,7 +66,7 @@
 
         #choose_movie { padding:20px; box-sizing:border-box;}
         #choose_movie select{height:30px; line-height:30px; width:100px;}
-        #choose_movie ul{background:#fff; margin-top:10px; padding:10px;}
+        #choose_movie ul{ background:#fff; margin-top:10px; padding:10px;}
         #choose_movie ul li{margin-top:10px;}
         #choose_movie ul li:first-child{margin-top:0px;}
         #choose_movie ul li span{width:26px; height:26px; line-height:26px; margin-right:5px; border-radius:50%; font-weight: 700; display:inline-block; font-size:11px; color:#fff; text-align:center;}
@@ -76,6 +76,10 @@
         #choose_movie ul li span.grade_18{background:#ED4C6B;}
         
         #choose_time { padding: 20px; box-sizing:border-box;}
+        #choose_time p { font-size: 20px; font-weight: 700; margin-bottom: 10px;}
+        #choose_time p input { font-size: 18px; width: 300px; }
+        #choose_time ul {background: #fff; margin-top: 20px; padding: 20px; }
+        #choose_time ul li { font-size: 20px; margin:10px; margin-right: 0; font-weight: 800; display: inline-block; padding-right: 30px;}
     </style>
 </head>
 <body>
@@ -181,7 +185,8 @@ $(document).ready(function(){
     });
     
 	$("#datepicker").datepicker({
-		  dateFormat: "yy-mm-dd"
+		  dateFormat: "yy-mm-dd",
+		  minDate: "0"
 	});
 });
 

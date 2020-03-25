@@ -40,8 +40,8 @@ public class TheaterDao {
 			while(rset.next()) {
 				list.add(new Theater(rset.getInt("THEATER_NO"), rset.getString("NAME"),
 						rset.getString("ADDRESS"), rset.getString("PHONE"), rset.getInt("ROOM_COUNT"),
-						rset.getString("TRANSPORT"), rset.getString("PARKING"), rset.getInt("LONGITUDE"),
-						rset.getInt("LATITUDE"), rset.getInt("SECTION_NO")));
+						rset.getString("TRANSPORT"), rset.getString("PARKING"), rset.getDouble("LONGITUDE"),
+						rset.getDouble("LATITUDE"), rset.getInt("SECTION_NO")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -67,8 +67,8 @@ public class TheaterDao {
 			while(rset.next()) {
 				list.add(new Theater(rset.getInt("THEATER_NO"), rset.getString("NAME"),
 						rset.getString("ADDRESS"), rset.getString("PHONE"), rset.getInt("ROOM_COUNT"),
-						rset.getString("TRANSPORT"), rset.getString("PARKING"), rset.getInt("LONGITUDE"),
-						rset.getInt("LATITUDE"), rset.getInt("SECTION_NO")));
+						rset.getString("TRANSPORT"), rset.getString("PARKING"), rset.getDouble("LONGITUDE"),
+						rset.getDouble("LATITUDE"), rset.getInt("SECTION_NO")));
 			}
 		} catch (SQLException e) {
 	
@@ -95,7 +95,7 @@ public class TheaterDao {
 			if(rset.next()) {
 				t = new Theater(rset.getInt("THEATER_NO"), rset.getString("NAME"), rset.getString("ADDRESS"),
 						rset.getString("PHONE"), rset.getInt("ROOM_COUNT"), rset.getString("TRANSPORT"),
-						rset.getString("PARKING"), rset.getInt("LONGITUDE"), rset.getInt("LATITUDE"),
+						rset.getString("PARKING"), rset.getDouble("LONGITUDE"), rset.getDouble("LATITUDE"),
 						rset.getInt("SECTION_NO"));
 			}
 			
