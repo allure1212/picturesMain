@@ -30,12 +30,29 @@ public class Theater {
    
    /* SECTION_NO */
    private int sectionNo;
-
+   
+   public Theater() {
+	   
+   }
    
    public int getTheaterNo() {
 	return theaterNo;
 }
-
+   
+public Theater(int theaterNo, String name, String address, String phone, int roomCount, String transport,
+		String parking, int longitude, int latitude, int sectionNo) {
+	super();
+	this.theaterNo = theaterNo;
+	this.name = name;
+	this.address = address;
+	this.phone = phone;
+	this.roomCount = roomCount;
+	this.transport = transport;
+	this.parking = parking;
+	this.longitude = longitude;
+	this.latitude = latitude;
+	this.sectionNo = sectionNo;
+}
 
 public void setTheaterNo(int theaterNo) {
 	this.theaterNo = theaterNo;
@@ -145,4 +162,12 @@ public Theater(int theaterNo, String name, String address, String phone, int roo
 	   this.latitude = latitude;
 	   this.sectionNo = sectionNo;
    }
+
+@Override
+public String toString() {
+	return "Theater [theaterNo=" + theaterNo + ", name=" + name + ", address=" + address + ", phone=" + phone
+			+ ", roomCount=" + roomCount + ", transport=" + transport + ", parking=" + parking + ", longitude="
+			+ longitude + ", latitude=" + latitude + ", sectionNo=" + sectionNo + "]";
+}
+
 }
