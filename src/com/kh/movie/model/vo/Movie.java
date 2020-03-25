@@ -1,6 +1,8 @@
 package com.kh.movie.model.vo;
 
-import java.sql.Date;
+
+import java.util.Date;
+
 
 public class Movie {
 	/* MOVIE_NO */
@@ -30,10 +32,13 @@ public class Movie {
 	/* STATUS */
 	private String status;
 	
+	/* OFF_DATE */
+	private Date offDate;
 
 	public Movie() {
 		
 	}
+
 
 	public Movie(int movieNo, String title, int ageLimit) {
 		super();
@@ -142,6 +147,16 @@ public class Movie {
 		this.status = status;
 	}
 
+
+	public Date getOffDate() {
+		return offDate;
+	}
+
+	public void setOffDate(Date offDate) {
+		this.offDate = offDate;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "Movie [movieNo=" + movieNo + ", title=" + title + ", runtime=" + runtime + ", director=" + director

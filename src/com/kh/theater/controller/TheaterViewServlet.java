@@ -59,6 +59,7 @@ public class TheaterViewServlet extends HttpServlet {
 		}
 		List<MovieDto> movies = new ArrayList<>(movieMap.values());
 		
+		request.setAttribute("theaterNo", theaterNo);
 		request.setAttribute("screenDate", screenDate);
 		request.setAttribute("selectTheater", t);
 		request.setAttribute("movies", movies);

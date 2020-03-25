@@ -13,9 +13,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.common.DateUtils;
 import com.kh.common.StringUtils;
+import com.kh.member.model.vo.Member;
 import com.kh.movie.model.service.MovieService;
 import com.kh.movie.model.vo.Movie;
 import com.kh.movie.model.vo.Movies;
@@ -32,6 +34,16 @@ public class ReservedThreeView extends HttpServlet {
  
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		Integer userNo = null;
+		if((Member)session.getAttribute("loginUser")==null) {
+			userNo = 1;
+		}else {
+			userNo = ((Member)session.getAttribute("loginUser")).getMemberNo();
+		}
+		
 		// 기본값 세팅 말고 사용자에게 잘못된 요청임을 알림
 		String sectionNo = StringUtils.getValue(request.getParameter("sectionNo"));
 		String theaterNo = request.getParameter("theaterNo");

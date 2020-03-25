@@ -3,6 +3,7 @@ package com.kh.reserved.model.service;
 import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.List;
 import java.util.Map;
 
 import com.kh.reserved.model.dao.ReserveDao;
@@ -46,6 +47,10 @@ public class ReserveService {
 		return result;
 	}
 
+	/** 2. 예약 정보 조회
+	 * @param userNo 사용자
+	 * @return
+	 */
 	public Reserved reserveInfo(Integer userNo) {
 		Connection conn = getConnection();
 		
@@ -54,6 +59,20 @@ public class ReserveService {
 		close(conn);
 		
 		return reserveInfo;
+	}
+
+	/** 3. 스크린의 이미 예약된 좌석 정보 조회
+	 * @param screenNo
+	 * @return
+	 */
+	public List<Integer> reservedSeats(String screenNo) {
+		Connection conn = getConnection();
+		
+		List<Integer> seats = new ReserveDao().reservedSeats(conn, screenNo);
+		
+		close(conn);
+		
+		return seats;
 	}
 
 }

@@ -1,17 +1,21 @@
 package com.kh.reserved.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import com.kh.reserved.model.vo.Reserved;
-
-import static com.kh.common.JDBCTemplate.*;
 
 
 public class ReserveDao {
@@ -161,5 +165,30 @@ public class ReserveDao {
 		}
 		
 		return reserveInfo;
+	}
+
+	public List<Integer> reservedSeats(Connection conn, String screenNo) {
+		List<Integer> seats = new ArrayList<>();
+		Set<Integer> seat = new HashSet<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("reservedSeats");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, screenNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				seat.add(rset.getInt("SEAT_NO"));
+			}
+			seats = new ArrayList<>(seat);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		return seats;
 	}
 }

@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.menubar.controller.NewMoviesDto;
+import com.kh.menubar.controller.TopMovieDto;
 import com.kh.movie.model.vo.Movie;
 import com.kh.movie.model.vo.MovieCBS;
 import com.kh.movie.model.vo.PageInfo;
@@ -22,7 +24,7 @@ import com.kh.still_image.model.vo.StillImageCBS;
 
 public class MovieDao {
 	Properties prop = new Properties();
-	public MovieDao(){ //湲곕낯�깮�꽦�옄
+	public MovieDao(){ 
 		String fileName = MovieDao.class.getResource("/sql/movie/movie-query.properties").getPath();
 		try {
 			prop.load(new FileReader(fileName));
@@ -31,12 +33,81 @@ public class MovieDao {
 		}
 	
 	}
+  
+  
+	
+	/** 1. 5위 영화 조회 (메인)
+	 * @param conn
+	 * @param num
+	 * @return
+	 */
+	public List<TopMovieDto> topFiveMovies(Connection conn, Integer num) {
+		List<TopMovieDto> tmd = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("topFiveMovies");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+		
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				tmd.add(new TopMovieDto(rset.getInt("MOVIE_NO"),rset.getInt("COUNT"),
+								rset.getInt("MAXNO"),rset.getString("MODIFY_NAME")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return tmd;
+	}
+
+	
+	/** 2. 신작뮤비 리스트 조회 (메인)
+	 * @param conn
+	 * @return
+	 */
+	public List<NewMoviesDto> newMovies(Connection conn) {
+		List<NewMoviesDto> nm = new ArrayList<>();
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("newMovies");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			while(rset.next()) {
+				nm.add(new NewMoviesDto(rset.getInt("MOVIE_NO"), rset.getDate("ON_DATE"),
+						rset.getInt("AGE_LIMIT"), rset.getString("TITLE"), rset.getString("MODIFY_NAME")));
+			}		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+
+		return nm;
+	}
+		
+	
+  
+  
+  
+  
+  
 	public List<Movie> selectScreen(Connection conn, String theaterNo, String screenDate) {
 		List<Movie> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectScreen");
+		String sql = prop.getProperty("selectS");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -171,14 +242,12 @@ public class MovieDao {
 			if(rset.next()) {
 				listCount = rset.getInt(1);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(stmt);
 		}
-		
 		return listCount;
 	}
 	
@@ -370,5 +439,8 @@ public ArrayList<Movie> selectOffList(Connection conn, PageInfo pi) {
 	}
 	return list;
 }
+
+
+  
 
 }

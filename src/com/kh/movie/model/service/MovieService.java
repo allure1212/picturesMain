@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.menubar.controller.NewMoviesDto;
+import com.kh.menubar.controller.TopMovieDto;
 import com.kh.movie.model.dao.MovieDao;
 import com.kh.movie.model.vo.Movie;
 import com.kh.movie.model.vo.MovieCBS;
@@ -16,11 +18,6 @@ import com.kh.movie.model.vo.PageInfo;
 import com.kh.still_image.model.vo.StillImageCBS;
 
 public class MovieService {
-
-	/** 1. 吏��뿭/�긽�쁺愿��뿉 �뵲�씪 �꽑�깮�맂 �쁺�솕 由ъ뒪�듃
-	 * @param theaterNo �궗�슜�옄媛� �꽑�깮�븳 �쁺�솕愿�
-	 * @return	�쐞 �꽑�깮�맂 吏��뿭/�쁺�솕愿��뿉�꽌 �긽�쁺以묒씤 �쁺�솕 由ъ뒪�듃
-	 */
 	public List<Movie> selectScreen(String theaterNo, String screenDate) {
 		Connection conn = getConnection();
 		
@@ -30,9 +27,33 @@ public class MovieService {
 		return list;
 	}
 
-	public List<Movie> selectAllByTheater(String theaterNo) {
-		return null;
+
+	/** 2. 메인화면에서 보여줄 예매율 상위5위
+	 * @param num 포스터 Level
+	 * @return
+	 */
+	public List<TopMovieDto> topFiveMovies(int num){
+		Connection conn = getConnection();
+		
+		List<TopMovieDto> tmd = new MovieDao().topFiveMovies(conn, num);
+		
+		close(conn);
+		return tmd;
 	}
+	
+	/** 3. 메인화면에서 보여줄 상영예정작
+	 * @return
+	 */
+	public List<NewMoviesDto> newMovies(){
+		Connection conn = getConnection();
+		
+		List<NewMoviesDto> nm = new MovieDao().newMovies(conn);
+		
+		close(conn);
+		
+		return nm;
+	}
+	
 	
 	public int insertMovie(MovieCBS mv, String[] genres, ArrayList<StillImageCBS> list) {
 		
@@ -122,7 +143,5 @@ public class MovieService {
 		return list;
 	}
 
-	
-	
 	
 }

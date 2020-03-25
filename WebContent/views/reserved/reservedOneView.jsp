@@ -62,7 +62,7 @@
         .inner_theater{position: relative; background:#fff;}
         .depth1 a{position: relative; display:block; background:#eee; width:150px; padding:10px; box-sizing:border-box; text-decoration:none; color:#333; }
         .depth1.active>a {background:#fff;}
-        .depth1.active>a:after {content:""; display:block; position:absolute; right:20px; top:13px; width:18px; height:14px; background:url(${contextPath}/jsp/resources/images/check.png)no-repeat;}
+        .depth1.active>a:after {content:""; display:block; position:absolute; right:20px; top:13px; width:18px; height:14px; background:url(${contextPath}/pictures/resources/images/check.png)no-repeat;}
         .depth1 a em{font-style:normal; font-size:13px;}
         .depth2{
             display: none;

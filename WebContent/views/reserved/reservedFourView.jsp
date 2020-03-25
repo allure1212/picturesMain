@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +49,7 @@
         #choose_seat table td input[type=checkbox]{ display: none;}
         #choose_seat table td input[type=checkbox]+label{ display:inline-block; background:#fff; cursor: pointer; position: relative; width:40px; height:40px; border-radius: 11px;}
         #choose_seat table td input[type=checkbox]:checked +label { display:inline-block; width:40px; height:40px; border-radius: 11px; margin-right:10px; background: red;}
-        
+        #choose_seat table td input[type=checkbox]:disabled +label { display:inline-block; width:40px; height:40px; border-radius: 11px; margin-right:10px; background: gray;}
        
         .ticket_cost{ font-size: 20px; text-align: center; color:#fff; font-weight: 700; margin: 40px; margin-top:60px; line-height:30px;}
         .btns {overflow: hidden; margin-top: 30px;}
@@ -161,7 +161,6 @@
 						<input type="hidden" name="seniorCost" value="${seniorCost}"/>
 						<input type="hidden" name="disabledCost" value="${disabledCost}"/>
 					
-					
                     <div class="ticket_cost">
                     	<ul>
                     		<li>관람인원: <a id="countNum">0</a> 명</li>
@@ -199,7 +198,8 @@
 	var youth = document.querySelector(".select_area > select[name=youth]");
 	var senior = document.querySelector(".select_area > select[name=senior]");
 	var disabled = document.querySelector(".select_area > select[name=disabled]");
-	var $seats = $('#choose_seat > table input:checkbox');
+	var seats = document.querySelectorAll('#choose_seat > table input[type=checkbox]');
+	var $seats = $(seats);
 	
 	var TYPE_COSTS = {
 		'ADULT': ${adultCost},
@@ -218,6 +218,15 @@
 			}
 			$('#clickBox').text(checkedSeat);
 		});
+		var reservedSeats = ${seats};
+		var filteredSeats = Array.from(seats).filter(function(data){
+			return reservedSeats.includes(parseInt(data.value));
+		});
+	
+		console.log(filteredSeats);
+		// attr name 
+		// prop booelan
+		$(filteredSeats).attr('disabled', 'disabled');
 	});
 	
 	function getParsedNumber(element) {
@@ -241,7 +250,9 @@
 	}
 	
 	function getTotalCost(adult, youth, senior, disabled) {
-		return getCost(adult) + getCost(youth) + getCost(senior) + getCost(disabled);
+		var totalCost = getCost(adult) + getCost(youth) + getCost(senior) + getCost(disabled);
+		var discount = ${gradeDiscount};
+		return totalCost*(100-discount)/100;
 	}
 	
 	function changeNum(element){
