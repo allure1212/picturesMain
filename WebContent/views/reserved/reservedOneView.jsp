@@ -86,7 +86,7 @@
         #choose_movie ul li span.grade_15{background:#FFC134;}
         #choose_movie ul li span.grade_18{background:#ED4C6B;}
         
-    
+    	#choose_time .title {margin-top: 20px;}
     </style>
 </head>
 <body>

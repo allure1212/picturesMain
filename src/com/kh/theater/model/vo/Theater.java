@@ -23,10 +23,10 @@ public class Theater {
    private String parking;
 
    /* LONGITUDE */
-   private int longitude;
+   private double longitude;
 
    /* LATITUDE */
-   private int latitude;
+   private double latitude;
    
    /* SECTION_NO */
    private int sectionNo;
@@ -119,22 +119,22 @@ public void setParking(String parking) {
 }
 
 
-public int getLongitude() {
+public double getLongitude() {
 	return longitude;
 }
 
 
-public void setLongitude(int longitude) {
+public void setLongitude(double longitude) {
 	this.longitude = longitude;
 }
 
 
-public int getLatitude() {
+public double getLatitude() {
 	return latitude;
 }
 
 
-public void setLatitude(int latitude) {
+public void setLatitude(double latitude) {
 	this.latitude = latitude;
 }
 
@@ -148,10 +148,26 @@ public void setSectionNo(int sectionNo) {
 	this.sectionNo = sectionNo;
 }
 
+
+public Theater(int theaterNo, String name, String address, String phone, int roomCount, String transport,
+		   String parking, double longitude, double latitude, int sectionNo) {
+	   this.theaterNo = theaterNo;
+	   this.name = name;
+	   this.address = address;
+	   this.phone = phone;
+	   this.roomCount = roomCount;
+	   this.transport = transport;
+	   this.parking = parking;
+	   this.longitude = longitude;
+	   this.latitude = latitude;
+	   this.sectionNo = sectionNo;
+   }
+
 @Override
 public String toString() {
 	return "Theater [theaterNo=" + theaterNo + ", name=" + name + ", address=" + address + ", phone=" + phone
 			+ ", roomCount=" + roomCount + ", transport=" + transport + ", parking=" + parking + ", longitude="
 			+ longitude + ", latitude=" + latitude + ", sectionNo=" + sectionNo + "]";
 }
+
 }

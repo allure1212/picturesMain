@@ -18,6 +18,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style>
 
     * {margin:0; padding:0}
@@ -27,8 +28,7 @@
         text-align: center; font-weight: 800;
         margin-bottom: 50px;
         }
-    .theaterInfo { height:300px; width: 50%; float: left; box-sizing: border-box;}
-   	
+    .theaterInfo { height:250px; width: 50%; float: left; box-sizing: border-box;}
     .theaterInfo p{
         padding: 10px;
         padding-left: 50px;
@@ -49,12 +49,15 @@
     .theaterInfo span a{
         font-size: 20px; padding: 10px; cursor: pointer;
     }
+    .theaterInfo span a:nth-child(3){}
     .theaterMap{
         height: 250px;
-        width: 250px;
+        width: 400px;
         background-color: plum;
     }
-    #form { margin-top: 400px; border: 1px solid black;}
+    .map{ margin-top: -100px;}
+    .map span {font-size:20px;}
+    #form { margin-top: 320px; border: 1px solid black;}
     .timeTable { padding: 20px; font-size: 18px; font-weight: 800;}
     #datePicker { padding: 20px; font-size: 18px;}
     .timeTable p { margin-bottom: 20px;}
@@ -69,6 +72,30 @@
     
     .timeList li {padding:20px; float: left;}
 
+     /* the Modal */
+	.modalTransport { display: none;}
+	.modalParking { display: none;}
+	.modal {
+	    position: fixed;
+	    z-index: 1;
+	    left : 0;
+	    top : 0;
+	    width: 100%;
+	    height: 100%;
+	    overflow: auto;
+	    background-color: rgba(0,0,0,0.7);  /* balck w/ opacity*/	
+	}
+	.modal-content {
+	    background-color: #fefefe;
+	    margin: 15% auto; /* 15% from the top and centered */
+	    padding: 20px;
+	    border: 1px solid #888;
+	    width: 30%; /* Could be more or less, depending on screen size */
+	    height: 30%;
+	    border-radius: 15px;                         
+	}
+	.modal-content p { font-size: 18px; font-weight: 800; padding: 30px; }
+	.modal-content button { float:right; width: 100px; height: 35px; display: block; border-radius:5px; background: gray; color:white;}
 </style>
 </head>
 <body>
@@ -82,14 +109,12 @@
         <p>영화관 소개</p>
         <p> 주   소 : <%= t.getAddress() %></p>
         <p>전화번호: <%= t.getPhone() %></p>
-        <span><a><img src="<%=contextPath%>/resources/images/transport.png" alt="" />#교통안내</a></span>
-        <span><a><img src="<%=contextPath%>/resources/images/location_car_40.png" alt="" />#주차안내</a></span>
+        <span><a id="transport"><img src="<%=contextPath%>/resources/images/transport.png" alt="" />#교통안내</a></span>
+        <span><a id="parking"><img src="<%=contextPath%>/resources/images/location_car_40.png" alt="" />#주차안내</a></span>
     </div>
-    <div class="theaterInfo">
-        <span><a><img src="<%=contextPath%>/resources/images/location_map_40.png" alt="" />영화관 위치</a></span>
-        <div class="theaterMap">
-        
-        </div>
+    <div class="theaterInfo map">
+        <span><img src="<%=contextPath%>/resources/images/location_map_40.png" alt="" />영화관 위치</span>
+        <div class="theaterMap" id="map"></div> <!-- 카카오맵 이용 -->
     </div>
 
     <form id="form" action="<%=contextPath%>/detailView.th" method="post">
@@ -122,6 +147,27 @@
     </form>
 </div>  
 
+<!-- The Modal -->
+<div class="modal modalTransport">
+	<div class="modal-content">
+		<p># <%=t.getName() %> 오시는 길 안내 #</p>
+		<p style="color:gray;"><%=t.getTransport() %></p>
+		<p><button type="button" class="closeBtn">확인</button></p>
+	</div>
+</div>
+
+<div class="modal modalParking">
+	<div class="modal-content">
+		<p># <%=t.getName() %> 주차 안내 #</p>
+		<p><%=t.getParking() %></p>
+		<p><button type="button" class="closeBtn">확인</button></p>
+	</div>
+</div>
+
+
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1cbeedfb6c9e9d06b3519f044674dbd"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=drawing"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -129,8 +175,11 @@
 <script>
 $(function(){
 	$("#datePicker").datepicker({
-		  dateFormat: "yy-mm-dd"
+		  dateFormat: "yy-mm-dd",
+		  minDate: "0"
 	});
+	console.log(<%=t.getLatitude()%>);
+	console.log(<%=t.getLongitude()%>);
 });
 
 $('#datePicker').change(function(){
@@ -146,6 +195,37 @@ function selectMovie(movie){
 	form.method = 'post';
 	form.submit(); //roonNo, screenDate, screenTime
 }
+
+$('#transport').click(function(){
+	$('.modalTransport').css('display','block');
+});
+
+$('#parking').click(function(){
+	$('.modalParking').css('display','block');
+});
+
+$('.closeBtn').click(function(){
+	$('.modalTransport').css('display','none');
+	$('.modalParking').css('display','none');
+});
+ 
+var container = document.getElementById('map');
+var lat = <%=t.getLatitude() %>;	//위도
+var lng = <%=t.getLongitude() %>;	//경도
+var options = { // MAP 기본 옵션
+		center : new kakao.maps.LatLng(lat,lng),	// 지도중심좌표
+		level : 3									// 지도 레벨(확대/축소)
+}
+
+var map = new kakao.maps.Map(container,options);	// 지도생성
+
+var markerPosition = new kakao.maps.LatLng(lat,lng);	// 마커표시할 위치
+var marker = new kakao.maps.Marker({
+	position: markerPosition
+});
+
+marker.setMap(map);
+
 
 </script>
 

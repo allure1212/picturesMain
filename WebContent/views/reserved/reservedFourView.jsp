@@ -164,8 +164,8 @@
                     <div class="ticket_cost">
                     	<ul>
                     		<li>관람인원: <a id="countNum">0</a> 명</li>
-                    		<li>총 금액 : <a id="cost">0</a> 원</li>
                     		<li>선택된 좌석수: <a id="clickBox"> </a> 개</li>
+                    		<li>총 금액 : <a id="cost">0</a> 원</li>
                     	</ul>
                     </div>
                     <div class="btns">
