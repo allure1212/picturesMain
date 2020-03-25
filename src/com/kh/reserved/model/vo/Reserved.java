@@ -12,6 +12,20 @@ public class Reserved {
 
    /* SCREEN_NO */
    private int screenNo;
+   
+   public Reserved() {
+	   
+   }
+
+
+public Reserved(int reservedNo, int paymentNo, int memberNo, int screenNo) {
+	super();
+	this.reservedNo = reservedNo;
+	this.paymentNo = paymentNo;
+	this.memberNo = memberNo;
+	this.screenNo = screenNo;
+}
+
 
 public int getReservedNo() {
 	return reservedNo;
@@ -45,12 +59,9 @@ public void setScreenNo(int screenNo) {
 	this.screenNo = screenNo;
 }
 
-public Reserved(int reservedNo, int paymentNo, int memberNo, int screenNo) {
-	super();
-	this.reservedNo = reservedNo;
-	this.paymentNo = paymentNo;
-	this.memberNo = memberNo;
-	this.screenNo = screenNo;
+@Override
+public String toString() {
+	return "Reserved [reservedNo=" + reservedNo + ", paymentNo=" + paymentNo + ", memberNo=" + memberNo + ", screenNo="
+			+ screenNo + "]";
 }
 
-}

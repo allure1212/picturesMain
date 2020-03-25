@@ -1,6 +1,8 @@
 package com.kh.movie.model.vo;
 
+
 import java.util.Date;
+
 
 public class Movie {
 	/* MOVIE_NO */
@@ -33,13 +35,39 @@ public class Movie {
 	/* OFF_DATE */
 	private Date offDate;
 
+	public Movie() {
+		
+	}
+
+
 	public Movie(int movieNo, String title, int ageLimit) {
 		super();
 		this.movieNo = movieNo;
 		this.title = title;
 		this.ageLimit = ageLimit;
 	}
-
+  
+	
+	public Movie(String title, String director, String actor, Date onDate, int runtime, int ageLimit, String synopsis) {
+		super();
+		this.title = title;
+		this.runtime = runtime;
+		this.director = director;
+		this.actor = actor;
+		this.ageLimit = ageLimit;
+		this.synopsis = synopsis;
+		this.onDate = onDate;
+	}
+	
+	public Movie(int movieNo, String title, int runtime, int ageLimit, Date onDate) {
+		super();
+		this.movieNo = movieNo;
+		this.title = title;
+		this.runtime = runtime;
+		this.ageLimit = ageLimit;
+		this.onDate = onDate;
+	}
+	
 	public boolean isEquals(Integer movieNo) {
 		if (movieNo == null) {
 			return false;
@@ -103,7 +131,7 @@ public class Movie {
 		this.synopsis = synopsis;
 	}
 
-	public Object getOnDate() {
+	public Date getOnDate() {
 		return onDate;
 	}
 
@@ -119,6 +147,7 @@ public class Movie {
 		this.status = status;
 	}
 
+
 	public Date getOffDate() {
 		return offDate;
 	}
@@ -128,5 +157,19 @@ public class Movie {
 	}
 
 	
+	@Override
+	public String toString() {
+		return "Movie [movieNo=" + movieNo + ", title=" + title + ", runtime=" + runtime + ", director=" + director
+				+ ", actor=" + actor + ", ageLimit=" + ageLimit + ", synopsis=" + synopsis + ", onDate=" + onDate
+				+ ", status=" + status + "]";
+	}
+
+	public boolean isEquals(Integer movieNo) {
+		if (movieNo == null) {
+			return false;
+		}
+		return this.movieNo == movieNo.intValue();
+	}
+
 }
 
