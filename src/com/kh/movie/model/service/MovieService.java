@@ -1,9 +1,6 @@
 package com.kh.movie.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.commit;
-import static com.kh.common.JDBCTemplate.getConnection;
-import static com.kh.common.JDBCTemplate.rollback;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -18,6 +15,18 @@ import com.kh.movie.model.vo.PageInfo;
 import com.kh.still_image.model.vo.StillImageCBS;
 
 public class MovieService {
+
+  
+	/* HAJIN */
+	public Movie selectList(int movieNo){
+			Connection conn = getConnection();
+		Movie m = new MovieDao().selectList(conn, movieNo);
+  
+  	close(conn);
+		return m;
+  
+  }
+  
 	public List<Movie> selectScreen(String theaterNo, String screenDate) {
 		Connection conn = getConnection();
 		
@@ -28,7 +37,7 @@ public class MovieService {
 	}
 
 
-	/** 2. 메인화면에서 보여줄 예매율 상위5위
+	/** 2. 메인화면에서 보여줄 예매율 상위5위 (SUJIN)
 	 * @param num 포스터 Level
 	 * @return
 	 */
@@ -41,7 +50,7 @@ public class MovieService {
 		return tmd;
 	}
 	
-	/** 3. 메인화면에서 보여줄 상영예정작
+	/** 3. 메인화면에서 보여줄 상영예정작 (SUJIN)
 	 * @return
 	 */
 	public List<NewMoviesDto> newMovies(){
@@ -55,6 +64,7 @@ public class MovieService {
 	}
 	
 	
+  /* CBS */
 	public int insertMovie(MovieCBS mv, String[] genres, ArrayList<StillImageCBS> list) {
 		
 		Connection conn = getConnection();

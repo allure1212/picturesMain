@@ -1,7 +1,5 @@
 package com.kh.movie.model.dao;
 
-import static com.kh.common.JDBCTemplate.close;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,9 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
+import static com.kh.common.JDBCTemplate.*;
 import com.kh.menubar.controller.NewMoviesDto;
 import com.kh.menubar.controller.TopMovieDto;
 import com.kh.movie.model.vo.Movie;
@@ -34,9 +32,49 @@ public class MovieDao {
 	
 	}
   
+ 
+	
+	/* hajin */
+	public Movie selectList(Connection conn, int movieNo){
+		
+		Movie m = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, movieNo);	rset = pstmt.executeQuery();
+		
+			if(rset.next()) {
+				m = new Movie(rset.getInt("MOVIE_NO"),
+								   rset.getString("TITLE"),
+								   rset.getInt("RUNTIME"),
+								   rset.getString("DIRECTOR"),
+								   rset.getString("ACTOR"),
+								   rset.getInt("AGE_LIMIT"),
+								   rset.getString("SYNOPSIS"),
+								   rset.getDate("ON_DATE"),
+								   rset.getString("STATUS"));
+			}
+		
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+			return m;
+	
+		
+	}
+
   
 	
-	/** 1. 5위 영화 조회 (메인)
+	/** 1. 5�쐞 �쁺�솕 議고쉶 (硫붿씤)
 	 * @param conn
 	 * @param num
 	 * @return
@@ -67,7 +105,7 @@ public class MovieDao {
 	}
 
 	
-	/** 2. 신작뮤비 리스트 조회 (메인)
+	/** 2. �떊�옉裕ㅻ퉬 由ъ뒪�듃 議고쉶 (硫붿씤)
 	 * @param conn
 	 * @return
 	 */
@@ -99,9 +137,7 @@ public class MovieDao {
 	
   
   
-  
-  
-  
+  /* cbs */
 	public List<Movie> selectScreen(Connection conn, String theaterNo, String screenDate) {
 		List<Movie> list = new ArrayList<>();
 		

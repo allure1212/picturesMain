@@ -2,7 +2,6 @@ package com.kh.borrow_room.model.vo;
 
 import java.sql.Date;
 
-import oracle.sql.DATE;
 
 public class BorrowRoom {
    /* BORROW_ROOM_NO */
@@ -39,7 +38,7 @@ public class BorrowRoom {
    private String content;
 
    /* REGI_DATE */
-   private Object regiDate;
+   private Date regiDate;
 
    /* EMAIL */
    private String email;
@@ -179,6 +178,17 @@ public void setContent(String content) {
 	this.content = content;
 }
 
+
+public Date getRegiDate() {
+	return regiDate;
+}
+
+
+public void setRegiDate(Date regiDate) {
+	this.regiDate = regiDate;
+}
+
+
 public Object getRegiDate() {
 	return regiDate;
 }
@@ -199,9 +209,11 @@ public String getReplyStatus() {
 	return replyStatus;
 }
 
+
 public void setReplyStatus(String replyStatus) {
 	this.replyStatus = replyStatus;
 }
+
 
 @Override
 public String toString() {
@@ -211,6 +223,7 @@ public String toString() {
 			+ ", hopeDate=" + hopeDate + ", content=" + content + ", regiDate=" + regiDate + ", email=" + email
 			+ ", replyStatus=" + replyStatus + "]";
 }
-	
 
+
+   
 }

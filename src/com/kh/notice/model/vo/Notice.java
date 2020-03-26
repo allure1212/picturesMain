@@ -89,5 +89,8 @@ public class Notice {
 				+ ", noticeContent=" + noticeContent + ", noticeDate=" + noticeDate + ", reference=" + reference + "]";
 	}
 	
-   
+
 }
+
+
+
