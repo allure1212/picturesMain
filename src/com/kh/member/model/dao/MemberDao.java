@@ -50,13 +50,13 @@ public class MemberDao {
 									   rset.getString("id"),
 									   rset.getString("pwd"),
 									   rset.getString("name"),
-									   rset.getObject("birth"),
+									   rset.getDate("birth"),
 									   rset.getString("email"),
 									   rset.getString("phone"),
 									   rset.getString("tel"),
 									   rset.getString("gender"),
 									   rset.getInt("ticket_count"),
-									   rset.getObject("signup_date"),
+									   rset.getDate("signup_date"),
 									   rset.getString("status"),
 									   rset.getString("black_status"),
 									   rset.getString("black_cause"),
@@ -75,7 +75,7 @@ public class MemberDao {
 	}
 	
 	
-	public int insertMember(Connection conn, Member m) {
+	public int insertMember(Connection conn, Member m, String birth) {
 		
 	int result = 0;
 	
@@ -88,7 +88,7 @@ public class MemberDao {
 		pstmt.setString(1, m.getId());
 		pstmt.setString(2, m.getPwd());
 		pstmt.setString(3, m.getName());
-		pstmt.setObject(4, m.getBirth());
+		pstmt.setString(4, birth);
 		pstmt.setString(5, m.getEmail());
 		pstmt.setString(6, m.getPhone());
 		pstmt.setString(7, m.getTel());
@@ -130,13 +130,13 @@ public class MemberDao {
 						   rset.getString("id"),
 						   rset.getString("pwd"),
 						   rset.getString("name"),
-						   rset.getObject("birth"),
+						   rset.getDate("birth"),
 						   rset.getString("email"),
 						   rset.getString("phone"),
 						   rset.getString("tel"),
 						   rset.getString("gender"),
 						   rset.getInt("ticket_count"),
-						   rset.getObject("signup_date"),
+						   rset.getDate("signup_date"),
 						   rset.getString("status"),
 						   rset.getString("black_status"),
 						   rset.getString("black_cause"),

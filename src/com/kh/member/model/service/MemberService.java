@@ -24,10 +24,10 @@ public class MemberService {
 	}
 	
 	
-	public int insertMember(Member mem) {
+	public int insertMember(Member mem, String birth) {
 		Connection conn = getConnection();
 		
-		int result = new MemberDao().insertMember(conn, mem);
+		int result = new MemberDao().insertMember(conn, mem, birth);
 		
 		if(result > 0) {
 			commit(conn);

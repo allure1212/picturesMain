@@ -34,19 +34,20 @@ public class MemberInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		 request.setCharacterEncoding("utf-8");
-		  
+		 
+		
 		 String id = request.getParameter("id"); 
 		 String pwd = request.getParameter("pwd"); 
 		 String name = request.getParameter("name");
-		 Object birth = request.getParameter("birth"); 
+		 String birth = request.getParameter("birth"); 
 		 String email = request.getParameter("email");
 		 String phone = request.getParameter("phone"); 
 		 String tel = request.getParameter("tel");
 		 String gender = request.getParameter("gender");
 		 
-		 Member mem = new Member(id, pwd, name, birth, email, phone, tel, gender);
+		 Member mem = new Member(id, pwd, name, email, phone, tel, gender);
 		 
-		 int result = new MemberService().insertMember(mem);
+		 int result = new MemberService().insertMember(mem, birth);
 		  
 		 if(result > 0) {
 

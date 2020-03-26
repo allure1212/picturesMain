@@ -14,7 +14,7 @@ public class Member {
 	/* NAME */
 	private String name;
 	/* BIRTH */
-	private Object birth;
+	private Date birth;
 	/* EMAIL */
 	private String email;
 	/* PHONE */
@@ -26,7 +26,7 @@ public class Member {
 	/* TICKET_COUNT */
 	private int ticketCount;
 	/* SIGNUP_DATE */
-	private Object signupDate;
+	private Date signupDate;
 	/* STATUS */
 	private String status;
 	/* BLACK_STATUS */
@@ -60,8 +60,8 @@ public class Member {
 	 * @param blackCause
 	 * @param blackCount
 	 */
-	public Member(int memberNo, String grade, String id, String pwd, String name, Object birth, String email,
-			String phone, String tel, String gender, int ticketCount, Object signupDate, String status,
+	public Member(int memberNo, String grade, String id, String pwd, String name, Date birth, String email,
+			String phone, String tel, String gender, int ticketCount, Date signupDate, String status,
 			String blackStatus, String blackCause, int blackCount) {
 		super();
 		this.memberNo = memberNo;
@@ -90,19 +90,17 @@ public class Member {
 	 * @param id
 	 * @param pwd
 	 * @param name
-	 * @param birth
 	 * @param email
 	 * @param phone
 	 * @param tel
 	 * @param gender
 	 */
-	public Member(String id, String pwd, String name, Object birth, String email, String phone, String tel,
+	public Member(String id, String pwd, String name, String email, String phone, String tel,
 			String gender) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
-		this.birth = birth;
 		this.email = email;
 		this.phone = phone;
 		this.tel = tel;
@@ -163,11 +161,11 @@ public class Member {
 		this.name = name;
 	}
 
-	public Object getBirth() {
+	public Date getBirth() {
 		return birth;
 	}
 
-	public void setBirth(Object birth) {
+	public void setBirth(Date birth) {
 		this.birth = birth;
 	}
 
@@ -215,7 +213,7 @@ public class Member {
 		return signupDate;
 	}
 
-	public void setSignupDate(Object signupDate) {
+	public void setSignupDate(Date signupDate) {
 		this.signupDate = signupDate;
 	}
 
