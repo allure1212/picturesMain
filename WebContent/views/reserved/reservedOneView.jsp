@@ -58,11 +58,11 @@
             width: 100px;
             margin:0 auto 20px;
             }
-        #choose_theater{padding:10px; box-sizing:border-box;}
+        #choose_theater{padding:20px; box-sizing:border-box;}
         .inner_theater{position: relative; background:#fff;}
         .depth1 a{position: relative; display:block; background:#eee; width:150px; padding:10px; box-sizing:border-box; text-decoration:none; color:#333; }
         .depth1.active>a {background:#fff;}
-        .depth1.active>a:after {content:""; display:block; position:absolute; right:20px; top:13px; width:18px; height:14px; background:url(${contextPath}/jsp/resources/images/check.png)no-repeat;}
+        .depth1.active>a:after {content:""; display:block; position:absolute; right:20px; top:13px; width:18px; height:14px; background:url(${contextPath}/pictures/resources/images/check.png)no-repeat;}
         .depth1 a em{font-style:normal; font-size:13px;}
         .depth2{
             display: none;
@@ -75,7 +75,7 @@
         }
         .depth2 a{background:#fff;}
 
-        #choose_movie { padding:10px; box-sizing:border-box;}
+        #choose_movie { padding:20px; box-sizing:border-box;}
         #choose_movie select{height:30px; line-height:30px; width:100px;}
         #choose_movie ul{background:#fff; margin-top:10px; padding:10px;}
         #choose_movie ul li{margin-top:10px;}
@@ -85,7 +85,8 @@
         #choose_movie ul li span.grade_12{background:#4DD6FF;}
         #choose_movie ul li span.grade_15{background:#FFC134;}
         #choose_movie ul li span.grade_18{background:#ED4C6B;}
-    
+        
+    	#choose_time .title {margin-top: 20px;}
     </style>
 </head>
 <body>

@@ -9,6 +9,10 @@ public class Faq {
 
    /* ANSWER */
    private String answer;
+   
+   public Faq() {
+	   
+   }
 
    public Faq() {
 	   
@@ -50,4 +54,5 @@ public String toString() {
 	return "Faq [faqNo=" + faqNo + ", question=" + question + ", answer=" + answer + "]";
 }
    
+
 }

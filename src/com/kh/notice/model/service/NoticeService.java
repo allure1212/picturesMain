@@ -1,5 +1,4 @@
 
-
 package com.kh.notice.model.service;
 
 import static com.kh.common.JDBCTemplate.close;
@@ -12,7 +11,6 @@ import com.kh.notice.model.dao.NoticeDao;
 import com.kh.notice.model.vo.Notice;
 
 public class NoticeService {
-	
 	
 
 	public ArrayList<Notice> selectList(){
@@ -28,5 +26,6 @@ public class NoticeService {
 	
 	
 	
+
 
 }

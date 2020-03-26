@@ -1,5 +1,6 @@
 package com.kh.notice.model.dao;
 
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -64,6 +65,6 @@ public class NoticeDao {
 		
 	}
 	
-	
+
 
 }

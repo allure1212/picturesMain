@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,9 +30,10 @@
         }
       
         #reserved_choose2 {background:#eee; padding:10px; overflow: hidden; width:1100px; margin-right: auto; margin-left: auto; border-radius: 3px;]}
-        #reserved_choose2 #choose_mem {position: relative; background:#333; height:100px; padding-left:100px;}
+        #reserved_choose2 #choose_mem {position: relative; background:#333; height:120px; padding-left:100px;}
         #reserved_choose2 #choose_mem .title{position:absolute; left:0; top:0; background:#5E5E5E; color:#fff; padding:10px; }
-        .poster_area { width:80px; height:80px; margin-top:10px; background:pink; float:left;}
+        .poster_area { width:80px; height:100px; margin-top:10px; background:pink; float:left;}
+        .poster_area img { width:100%; height:100%;}
         .select_area { float:left; margin:30px 0 0 75px;}
         .select_area select{ height:40px; line-height:40px; width:150px; margin-right:10px; border-radius:5px;}
 
@@ -48,7 +49,7 @@
         #choose_seat table td input[type=checkbox]{ display: none;}
         #choose_seat table td input[type=checkbox]+label{ display:inline-block; background:#fff; cursor: pointer; position: relative; width:40px; height:40px; border-radius: 11px;}
         #choose_seat table td input[type=checkbox]:checked +label { display:inline-block; width:40px; height:40px; border-radius: 11px; margin-right:10px; background: red;}
-        
+        #choose_seat table td input[type=checkbox]:disabled +label { display:inline-block; width:40px; height:40px; border-radius: 11px; margin-right:10px; background: gray;}
        
         .ticket_cost{ font-size: 20px; text-align: center; color:#fff; font-weight: 700; margin: 40px; margin-top:60px; line-height:30px;}
         .btns {overflow: hidden; margin-top: 30px;}
@@ -81,7 +82,7 @@
                 <div id="choose_mem">
                     <div class="title">인원선택</div>
                     <div class="poster_area">
-                        <img src="" alt="" />
+                        <img src="${contextPath}/resources/images/${mainPoster}" alt="" />
                     </div>
                     <div class="select_area">
                         <select name="adult" class="countNum" onchange="changeNum(this)">
@@ -160,12 +161,11 @@
 						<input type="hidden" name="seniorCost" value="${seniorCost}"/>
 						<input type="hidden" name="disabledCost" value="${disabledCost}"/>
 					
-					
                     <div class="ticket_cost">
                     	<ul>
                     		<li>관람인원: <a id="countNum">0</a> 명</li>
-                    		<li>총 금액 : <a id="cost">0</a> 원</li>
                     		<li>선택된 좌석수: <a id="clickBox"> </a> 개</li>
+                    		<li>총 금액 : <a id="cost">0</a> 원</li>
                     	</ul>
                     </div>
                     <div class="btns">
@@ -190,6 +190,7 @@
    
 <form id="form" action="${contextPath}/reservedOne.do" role="form" method="post">
 	<input type="hidden" name="screenNo" value="${screenNo}"/>
+	<input type="hidden" name="totalCost" value=""/>
 </form>
     
 <script>
@@ -197,7 +198,8 @@
 	var youth = document.querySelector(".select_area > select[name=youth]");
 	var senior = document.querySelector(".select_area > select[name=senior]");
 	var disabled = document.querySelector(".select_area > select[name=disabled]");
-	var $seats = $('#choose_seat > table input:checkbox');
+	var seats = document.querySelectorAll('#choose_seat > table input[type=checkbox]');
+	var $seats = $(seats);
 	
 	var TYPE_COSTS = {
 		'ADULT': ${adultCost},
@@ -216,6 +218,15 @@
 			}
 			$('#clickBox').text(checkedSeat);
 		});
+		var reservedSeats = ${seats};
+		var filteredSeats = Array.from(seats).filter(function(data){
+			return reservedSeats.includes(parseInt(data.value));
+		});
+	
+		console.log(filteredSeats);
+		// attr name 
+		// prop booelan
+		$(filteredSeats).attr('disabled', 'disabled');
 	});
 	
 	function getParsedNumber(element) {
@@ -239,7 +250,9 @@
 	}
 	
 	function getTotalCost(adult, youth, senior, disabled) {
-		return getCost(adult) + getCost(youth) + getCost(senior) + getCost(disabled);
+		var totalCost = getCost(adult) + getCost(youth) + getCost(senior) + getCost(disabled);
+		var discount = ${gradeDiscount};
+		return totalCost*(100-discount)/100;
 	}
 	
 	function changeNum(element){
@@ -262,6 +275,7 @@
 	
 	function next(){
 		var sumNum = getTotalCount(adult, youth, senior, disabled);
+		var totalCost = getTotalCost(adult, youth, senior, disabled);
 		var $chekcedSeats = $seats.filter(':checked');
 		var checkedSeatCount = $seats.filter(':checked').length;
 		var form = document.getElementById('form');
@@ -277,12 +291,8 @@
 		// seatNo 
 		// input[name=seatNo]
 		// input[name=seatNo]
-		// input[name=seatNo]
-		// input[name=seatNo]
-		
+
 		// fragment 가짜 DOM객체
-		// 
-		
 		var fragment = document.createDocumentFragment();
 		
 		$chekcedSeats.each(function() {
@@ -292,6 +302,20 @@
 			fragment.appendChild(input);
 			
 		});
+		
+		
+// 		var adult = document.querySelector(".select_area > select[name=adult]");
+// 		var youth = document.querySelector(".select_area > select[name=youth]");
+// 		var senior = document.querySelector(".select_area > select[name=senior]");
+// 		var disabled = document.querySelector(".select_area > select[name=disabled]");
+		var $select = $('.select_area > .countNum');
+		$select.each(function() {
+			var input = document.createElement('input');
+			input.name = this.name;
+			input.value = this.value;
+			fragment.appendChild(input);
+		});
+		
 		// DOM
 		// Document Object Model
 		
@@ -299,10 +323,12 @@
 		// input
 		// </form>
 		form.appendChild(fragment);
+		form.totalCost.value = totalCost;
 		form.action = '${contextPath}/reservedFive.do';
 		form.method = 'post';
 		form.submit();
-	}
+	};
+
 	
 	
 </script>

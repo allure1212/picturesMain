@@ -30,6 +30,8 @@
 		sectionDto.addTheaterDto(theaterDto);
 	}
 	List<SectionDto> sections = new ArrayList<>(sectionMap.values());
+	
+	
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>	
 
@@ -47,9 +49,10 @@
 #wrap{min-width:1200px;}
 /*헤더*/
 #header {position: relative; height:114px; border-bottom:1px solid #eee;}
-#header .logo{ position: absolute; z-index: 1; top: 12px;  left: 50%; margin-left: -109px; text-indent: -9999em; background: url(<%= contextPath%>/resources/images/p_logo.png) no-repeat center center;background-size:100% auto;}
-#header .logo{display:block; width:219px; height:67px;}
-#header .gnb{position: relative; width: 1000px; height: 70px;  margin: 0 auto; border-bottom: 1px solid #B2B2B2;}
+#header .logo{ position: absolute; z-index: 3; top: 12px;  left: 50%; margin-left: -109px; text-indent: -9999em; background: url(<%= contextPath%>/resources/images/p_logo.png) no-repeat center center;background-size:100% auto;}
+#header .logo{ display:block; width:219px; height:67px;}
+#header .logo a { display:block;}
+#header .gnb{position: relative; width: 1300px; height: 70px;  margin: 0 auto; border-bottom: 1px solid #B2B2B2;}
 #header .gnb > ul {margin-top:40px;}
 #header .gnb > ul:after {content:""; display:block; clear:both;}
 #header .gnb > ul > li {float:left;}
@@ -145,26 +148,23 @@
 							</li>
 						</ul>
 					</li>
-					<li>
-						<a href="#">스토어</a>
-					</li>
 				</ul>
 			</div>
 		</div>
 		<!--헤더 E-->
 
 	</div>
-	<form id="theaterDetail" action="<%=contextPath%>/detailView.th" method="post">
-		<input type="hidden" name="theaterNo"/>
-	</form>
-	
-	<script>
-		function theaterDetail(no){
-			var form = document.getElementById("theaterDetail");
-			form.theaterNo.value = no;
-			form.method="post";
-			form.submit();
-		};
-	</script>
+<form id="theaterDetail" action="<%=contextPath%>/detailView.th" method="post">
+	<input type="hidden" name="theaterNo"/>
+</form>
+
+<script>
+	function theaterDetail(no){
+		var form = document.getElementById("theaterDetail");
+		form.theaterNo.value = no;
+		form.method="post";
+		form.submit();
+	};
+</script>
 </body>
 </html>

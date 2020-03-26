@@ -15,6 +15,18 @@ public class Screen {
 
    /* SCREEN_DATE */
    private Date screenDate;
+   
+   public Screen() {
+	   
+   }
+
+public Screen(int screenNo, int roomNo, int movieNo, Date screenDate) {
+	super();
+	this.screenNo = screenNo;
+	this.roomNo = roomNo;
+	this.movieNo = movieNo;
+	this.screenDate = screenDate;
+}
 
 public int getScreenNo() {
 	return screenNo;
@@ -48,12 +60,9 @@ public void setScreenDate(Date screenDate) {
 	this.screenDate = screenDate;
 }
 
-public Screen(int screenNo, int roomNo, int movieNo, Date screenDate) {
-	super();
-	this.screenNo = screenNo;
-	this.roomNo = roomNo;
-	this.movieNo = movieNo;
-	this.screenDate = screenDate;
+@Override
+public String toString() {
+	return "Screen [screenNo=" + screenNo + ", roomNo=" + roomNo + ", movieNo=" + movieNo + ", screenDate=" + screenDate
+			+ "]";
 }
-
 }

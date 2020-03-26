@@ -51,7 +51,7 @@
         .inner_theater{position: relative; background:#fff;}
         .depth1 a{position: relative; display:block; background:#eee; width:150px; padding:10px; box-sizing:border-box; text-decoration:none; color:#333; }
         .depth1.active>a {background:#fff;}
-        .depth1.active>a:after {content:""; display:block; position:absolute; right:20px; top:13px; width:18px; height:14px; background:url(${contextPath}/jsp/resources/images/check.png)no-repeat;}
+        .depth1.active>a:after {content:""; display:block; position:absolute; right:20px; top:13px; width:18px; height:14px; background:url(${contextPath}/pictures/resources/images/check.png)no-repeat;}
         .depth1 a em{font-style:normal; font-size:13px;}
         .depth2{
             display: none;
@@ -66,7 +66,7 @@
 
         #choose_movie { padding:20px; box-sizing:border-box;}
         #choose_movie select{height:30px; line-height:30px; width:100px;}
-        #choose_movie ul{background:#fff; margin-top:10px; padding:10px;}
+        #choose_movie ul{ background:#fff; margin-top:10px; padding:10px;}
         #choose_movie ul li{margin-top:10px;}
         #choose_movie ul li:first-child{margin-top:0px;}
         #choose_movie ul li span{width:26px; height:26px; line-height:26px; margin-right:5px; border-radius:50%; font-weight: 700; display:inline-block; font-size:11px; color:#fff; text-align:center;}
@@ -76,6 +76,10 @@
         #choose_movie ul li span.grade_18{background:#ED4C6B;}
         
         #choose_time { padding: 20px; box-sizing:border-box;}
+        #choose_time p { font-size: 20px; font-weight: 700; margin-bottom: 10px;}
+        #choose_time p input { font-size: 18px; width: 300px; }
+        #choose_time ul {background: #fff; margin-top: 20px; padding: 20px; }
+        #choose_time ul li { font-size: 20px; margin:10px; margin-right: 0; font-weight: 800; display: inline-block; padding-right: 30px;}
     </style>
 </head>
 <body>
@@ -131,7 +135,9 @@
                     </select>
                     <ul>
                     	<c:forEach items="${movieList}" var="m">
-                    		<li><a href="#selectMovie" onclick="selectMovie('${m.movieNo}')"><span class="grade_${m.ageLimit}">${m.ageLimit}</span><strong>${m.title}</strong></a></li>
+                    		<li><a href="#selectMovie" onclick="selectMovie('${m.movieNo}')">
+                    		<span class="grade_${m.ageLimit}">${m.ageLimit==0 ? 'All':m.ageLimit}</span>
+                    		<strong>${m.title}</strong></a></li>
                     	</c:forEach>
 
                     </ul>
@@ -179,9 +185,11 @@ $(document).ready(function(){
     });
     
 	$("#datepicker").datepicker({
-		  dateFormat: "yy-mm-dd"
+		  dateFormat: "yy-mm-dd",
+		  minDate: "0"
 	});
 });
+
 function changeLocation(sectionNo) {
 	var form = document.getElementById('form');
 	if (!sectionNo) {
@@ -210,6 +218,7 @@ function selectTheater(theaterNo) {
 
 function selectMovie(movieNo){
 	var form = document.getElementById('form');
+	var datepicker = document.getElementById('datepicker');
 	
 	if (!form.sectionNo.value) {
 		return alert('지역을 선택해 주세요');
@@ -220,6 +229,7 @@ function selectMovie(movieNo){
 	if (!movieNo){
 		return alert('영화를 선택해주세요');
 	}
+	form.screenDate.value = datepicker.value;
 	form.movieNo.value = movieNo;
 	form.action = '${contextPath}/reservedThree.do';
 	form.method = 'post';
