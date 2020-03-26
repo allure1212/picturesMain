@@ -98,41 +98,59 @@
 	<div class="outer">
 	<br clear="both">
 	<div id="movieChart">
-		<img src="../../resources/images/movieChart2.png" width="50px" height="50px" align="center">
+		<img src="<%=contextPath %>/resources/images/movieChart2.png" width="50px" height="50px" align="center">
 		<div id="name1">Movie Chart
-		<img src="../../resources/images/line.png" width="300px" height="20px" >
+		<img src="<%=contextPath %>/resources/images/line.png" width="300px" height="20px" >
 		</div>
 	</div>
 		<br clear="both">
 
 						<!-- Thumbnails -->
-							<form>
-								<div id="movieMain">
-									<img src="../../resources/images/movie1.jpg" width="450px" height="550px">
+							<form action="<%=contextPath%>/movieDetail.mo">
+								<div class="movie" id="movieMain">
+									<input type="hidden" value="1">
+									<img src="<%=contextPath %>/resources/images/movie1.jpg" width="450px" height="550px">
 								</div>
 								
-								
-								<div class="movieSub" id="movieSub1">
-									<img src="../../resources/images/commingMovie1.jpg" width="300" height="250">
+								<div class="movieSub movie" id="movieSub1">
+									<input type="hidden" value="2">
+									<img src="<%=contextPath %>/resources/images/movie1.jpg" width="300" height="250">
 								</div>
-								<div class="movieSub" id="movieSub2">
-									<img src="../../resources/images/commingMovie2.jpg" width="300" height="250">
+								<div class="movieSub movie" id="movieSub2">
+									<input type="hidden" value="3">
+									<img src="<%=contextPath %>/resources/images/movie1.jpg" width="300" height="250">
 								</div>
-								<div class="movieSub" id="movieSub3">
-									<img src="../../resources/images/commingMovie3.jpg" width="300" height="250">
+								<div class="movieSub movie" id="movieSub3">
+									<input type="hidden" value="4">
+									<img src="<%=contextPath %>/resources/images/movie1.jpg" width="300" height="250">
 								</div>
-								<div class="movieSub" id="movieSub4">
-									<img src="../../resources/images/commingMovie4.jpg" width="300" height="250">	
+								<div class="movieSub movie" id="movieSub4">
+									<input type="hidden" value="5">
+									<img src="<%=contextPath %>/resources/images/movie1.jpg" width="300" height="250">	
 								</div>
 							
 							</form>
 							
 							<br clear="both"><br>
 							
+				<script>
+				
+					$(".movie").click(function(){
+						
+						var value = $(this).children().eq(0).val();
+						
+						console.log(value);
+						
+						location.href="<%=contextPath%>/movieDetail.mo?movieNo=" + value;
+						
+					});
+				
+				</script>
+							
 		<div id="commingSoon">					
-			<img src="../../resources/images/movieChart2.png" width="50px" height="50px" align="center">
+			<img src="<%=contextPath %>/resources/images/movieChart2.png" width="50px" height="50px" align="center">
 			<div id="name2">CommingSoon
-				<img src="../../resources/images/line.png" width="300px" height="20px" >
+				<img src="<%=contextPath %>/resources/images/line.png" width="300px" height="20px" >
 			</div>
 		</div>		
 		<br clear="both"><br><br>

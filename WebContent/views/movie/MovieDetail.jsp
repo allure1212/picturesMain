@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.movie.model.vo.Movie" %>    
+<%
+	Movie m = (Movie)request.getAttribute("m");
+%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +38,7 @@
 		border:1px solid black;
 	}
 	#movieName{
-		width:200px;
+		width:400px;
 		height:30px;
 		border:1px solid black;
 		margin-top:-400px;
@@ -72,12 +76,8 @@
 		margin-left:550px;
 		margin-top:30px;
 	}
-	#input button{
-		margin:20px;
-		align:center;
-	}
 	#movieSyno{
-		width:400px;
+		width:500px;
 		height:400px;
 		border:1px solid black;
 		margin-top:30px;
@@ -95,84 +95,6 @@
 		margin-left:800px;
 		margin-top:-400px;
 	}
-	#reviewName{
-		margin-left:50px;
-		font-weight:bold;
-	}
-	#reviewMainName{
-		margin-left:250px;
-		margin-top:50px;
-	}
-	#reviewTotal{
-		margin-left:700px;
-		margin-top:-60px;
-		font-weight:bold;
-		text-align:center;
-	}
-	.star_score_box{
-	 	display:inline-block;
-		border:1px solid lightgray;
-		width:300px;
-		height:70px;
-		text-align:center;
-		margin-top:8px;
-		margin-left:40px;
-		padding-top:10px;
-		border-radius:5px;
-		background:white;
-	}
-	.star_rate button{
-		border:none;
-		background:white;
-		outline:0;
-		cursor:pointer;
-	}
-	#reviewContent{
-		width:400px;
-		height:70px;
-		margin-left:315px;
-		margin-top:-55px;
-		border:1px solid lightgray;
-		padding-top:10px;
-		border-radius:5px;
-		background:white;
-	}
-	#reviewContentDetail{
-	    width: 100%;
-	    resize: none;
-	    font-size: 14px;
-	    color:black !important;
-	    height:100%;
-	    border:none;
-	    outline:0;
-	    border-radius:5px;
-	    background:white;
-	}
-	#reviewContentBtn{
-		width:100px;
-		height:70px;
-		margin-left:730px;
-		margin-top:-80px;
-		border:none;
-	}
-	#reviewContentBtn button{
-		width:100%;
-		height:100%;
-		border-radius:5px;
-		background-color:lightsalmon;
-		outline:0;
-		border:0;
-	}
-	#reviewBox{
-		border:1px solid black;
-		width:900px;
-		height:100px;
-		margin-top:50px;
-		margin-left:350px;
-		border:3px solid beige;
-		background-color:beige;
-		border-radius:5px;
-	}
 	#input button{
 		outline:0;
 		border:0;
@@ -180,15 +102,27 @@
 		background:lightsalmon;
 		width:60px;
 		height:20px;
+		margin:20px;
+		align:center
 	}
-	#reviewList tr td{
+	.replyArea{
 		color:black;
-		border-bottom: 1px solid #444444;
+		margin:auto;
+		width:900px;
+		margin-top:80px;
+		
 	}
-	#reviewList{
-		margin-left:350px;
-		margin-top:50px;
+	#replyContent{
+		width:500px;
+		border:none;
+		outline:none;
 	}
+	#addReply{
+		width:55px;
+		height:80px;
+		background:beige;
+	}
+	.line{border-bottom:1px solid black;}
 	
 
 	
@@ -201,9 +135,9 @@
 	
 	<div class="outer">
 		<div id="movieDetail">
-			<img src="../../resources/images/movieChart2.png" width="50px" height="50px" align="center">
+			<img src="<%=contextPath %>/resources/images/movieChart2.png" width="50px" height="50px" align="center">
 			<div id="name1">영화 상세 정보 
-				<img src="../../resources/images/line.png" width="300px" height="20px" >
+				<img src="<%=contextPath %>/resources/images/line.png" width="300px" height="20px" >
 			</div>
 		</div>
 	<br clear="both">
@@ -213,100 +147,105 @@
 		</div>
 		
 		<div id="movieName">
-			<p>조조래빗</p>
+			<p><%=m.getTitle() %></p>
 		</div>
 		<div id="movieReporter">
 			<p>예매율 4.3%  98% (실관람평 : 3,654명)</p>
 		</div>
 		<div id="movieInfo">
-			<p>감독 : 타이카 와이티티 /	<br>
-				 배우 : 스칼렛 요한슨 ,  로만 그리핀 데이비스 ,  타이카 와이티티 ,  토마신 맥켄지 <br>
-				장르 : 드라마, 전쟁, 코미디 / 기본 : 12세 이상, 108분, 미국 <br>
-				개봉 : 2020.02.05</p>
+			<p>감독 : <%=m.getDirector() %></p>
+			<p>배우 : <%=m.getActor() %></p>
+			<p>장르 : 드라마, 전쟁, 코미디 / 기본 : <%=m.getAgeLimit() %>, <%=m.getRuntime() %></p>
+			<p>개봉 : date넣기</p>
 		</div>
 		<div id="input">
 			<button>예매하기</button>
-			<img src="../../resources/images/heart1.png" width="30px" height="30px">
+			<img src="<%=contextPath %>/resources/images/heart1.png" width="30px" height="30px">
 			<button>찜하기</button>
 		</div>
 	</form>
 	
 	<div id="movieSyno">
-		<p><br><br>제2차 세계대전 말기, 엄마 ‘로지’(스칼렛 요한슨)와 단둘이 살고 있는 10살 소년 ‘조조’(로만 그리핀 데이비스). <br><br>
-		원하던 독일 소년단에 입단하지만 겁쟁이 토끼라 놀림 받을 뿐이다. 상심한 ‘조조’에게 상상 속 친구 ‘히틀러’(타이카 와이티티)는 유일한 위안이 된다. <br><br>
-		‘조조’는 어느 날 우연히 집에 몰래 숨어 있던 미스터리한 소녀 ‘엘사’(토마신 맥켄지)를 발견하게 된다.세상에서 가장 위험한 인물이 왜 여기에?!제2차 세계대전 말기, <br>
-		 엄마 ‘로지’(스칼렛 요한슨)와 단둘이 살고 있는 10살 소년 ‘조조’(로만 그리핀 데이비스). 위안이 된다</p>
+		<p><%=m.getSynopsis() %></p>
 	</div>
 	<div id="movieStillImg">
 		<img>
 	</div>
 	
-	<div class="reviewForm">
-		<form>
-			<div id="reviewMainName">
-				<div id="reviewName">평점 및 관람평</div>
-				<img src="../../resources/images/line.png" width="300px" height="20px" >
-				<div id="reviewTotal">총 평점 <img src="../../resources/images/star.png" width="30px" height="30px"></div>
-			</div>
-		</form>
-		<form id="reviewBox">
-		<div class="star_score_box">
-			<strong class="score_info">9 점</strong><br>
-			<div class="star_info">
-				<div class="star_rate">
-					<button type="button"><img src="../../resources/images/reviewStarOff.png" width="20px" height="20px"></button>
-					<button type="button"><img src="../../resources/images/reviewStarOff.png" width="20px" height="20px"></button>
-					<button type="button"><img src="../../resources/images/reviewStarOff.png" width="20px" height="20px"></button>
-					<button type="button"><img src="../../resources/images/reviewStarOff.png" width="20px" height="20px"></button>
-					<button type="button"><img src="../../resources/images/reviewStarOff.png" width="20px" height="20px"></button>
-					<button type="button"><img src="../../resources/images/reviewStarOff.png" width="20px" height="20px"></button>
-					<button type="button"><img src="../../resources/images/reviewStarOff.png" width="20px" height="20px"></button>
-					<button type="button"><img src="../../resources/images/reviewStarOff.png" width="20px" height="20px"></button>
-					<button type="button"><img src="../../resources/images/reviewStarOff.png" width="20px" height="20px"></button>
-					<button type="button"><img src="../../resources/images/reviewStarOff.png" width="20px" height="20px"></button>				
+		<!--  댓글 관련 영역 -->
+	<div class="replyArea"> 
+		<!-- 댓글 작성하는 table -->
+		<table border="1" align="center"> 
+			<tr>
+				<th>
+				<div>
+					<p id="star_grade">
+						<a href="#">★</a>
+						<a href="#">★</a>
+						<a href="#">★</a>
+						<a href="#">★</a>
+						<a href="#">★</a>
+					</p>
 				</div>
-			</div>
-				<div id="reviewContent"><textarea id="reviewContentDetail" placeholder="평점 및 관람평을 작성해주세요."></textarea></div>
-				<div id="reviewContentBtn"><button type="submit">관람평 작성</button></div>
-		</div>
-	</form>
-	
-	<form id="reviewListArea">
-		<table id="reviewList">
-			<tr>
-				<td width="100px" height="30px">test123</td>
-				<td width="100px">9점</td>
-				<td width="600px">작성내요아ㅏㅏㅏㅏㅏㅏㅏㅏ너무재밌네요앙하핳ㅏ</td>
-				<td width="60px">신고</td>
-			</tr>
-			<tr>
-				<td width="100px" height="30px">test123</td>
-				<td width="100px">9점</td>
-				<td width="600px">작성내요아ㅏㅏㅏㅏㅏㅏㅏㅏ너무재밌네요앙하핳ㅏ</td>
-				<td width="60px">신고</td>
-			</tr>
-			<tr>
-				<td width="100px" height="30px">test123</td>
-				<td width="100px">9점</td>
-				<td width="600px">작성내요아ㅏㅏㅏㅏㅏㅏㅏㅏ너무재밌네요앙하핳ㅏ</td>
-				<td width="60px">신고</td>
-			</tr>
-			<tr>
-				<td width="100px" height="30px">test123</td>
-				<td width="100px">9점</td>
-				<td width="600px">작성내요아ㅏㅏㅏㅏㅏㅏㅏㅏ너무재밌네요앙하핳ㅏ</td>
-				<td width="60px">신고</td>
-			</tr>
-			<tr>
-				<td width="100px" height="30px">test123</td>
-				<td width="100px">9점</td>
-				<td width="600px">작성내요아ㅏㅏㅏㅏㅏㅏㅏㅏ너무재밌네요앙하핳ㅏ</td>
-				<td width="60px">신고</td>
+				</th>
+				<td><textarea id="replyContent" rows="3" cols="60" style="resize:none;" placeholder="별점 및 관람평을 작성해주세요"></textarea></td>
+				<td><button id="addReply">관람평 작성</button></td>
+				
+			
 			</tr>
 		</table>
-	</form>
-</div>
+		
+		<br><br>
+		<div id="replyListArea">
+			<table id="replyList" align="center">
+
+			</table>
+		</div>
+		<br><br><br><br><br>
+	</div>
+
+	<script>
 	
+	$(function(){
+		
+		selectReplyList();
+		
+		window.setInterval(selectReplyList , 10000);
+		
+
+	});
+		function selectReplyList(){
+			var movieNo = <%=m.getMovieNo()%>;
+			
+			$.ajax({
+				url:"rlist.re?movieNo=" + movieNo,
+				type:"get",
+				success:function(list){
+					
+					var value ="";
+					
+					for(var i in list){
+						
+						value += '<tr class="line">' +
+									'<td width="150">' + list[i].id + '</td>' +
+									'<td width="100">' + '<img src="<%=contextPath%>/resources/images/star2.png" width="20" height="20">' + list[i].reviewRating + '</td>' +
+									'<td width="500">' + list[i].reviewText + '</td>' + 
+								'</tr>';
+					}
+					$("#replyList").html(value);
+				},
+				error:function(){
+					console.log("댓글 리스트 조회 ajax 통신 실패!!");
+				}
+			});
+		}
+		
+		$("#star_grade a").click(function(){
+			$(this).parent(),children("a").removeClass("on");
+			$(this).addClass("on").preAll("a").addClass("on");
+			return false;
+		});
+	</script>
 	
 	
 	<br><br><br><br><br><br><br><br><br>
